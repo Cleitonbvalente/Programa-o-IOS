@@ -1,0 +1,66 @@
+import Foundation
+
+enum Operacao: String {
+    case contagem = "contagem"
+    case buscar = "buscar"
+    case substituir = "substituir"
+}
+
+func lerArquivo(noCaminho caminho: String) -> String? {
+    return try? String(contentsOfFile: caminho, encoding: .utf8)
+}
+
+func contagemPalavras(_ texto: String) -> Int {
+    return texto.split { $0.isWhitespace || $0.isNewline }.count
+}
+
+func buscarPalavra(_ texto: String, palavra: String) -> [Int] {
+    var posicoes: [Int] = []
+    let palavras = texto.components(separatedBy: .whitespacesAndNewlines)
+    for (index, elemento) in palavras.enumerated() where elemento == palavra {
+        posicoes.append(index + 1)
+    }
+    return posicoes
+}
+
+func substituirPalavra(_ texto: String, alvo: String, substituicao: String) -> String {
+    return texto.replacingOccurrences(of: alvo, with: substituicao)
+}
+
+guard CommandLine.arguments.count >= 3 else {
+    print("Uso: programa <operacao> <caminho do arquivo> [parametros...]")
+    exit(1)
+}
+
+let operacao = Operacao(rawValue: CommandLine.arguments[1])
+let caminhoArquivo = CommandLine.arguments[2]
+
+guard let texto = lerArquivo(noCaminho: caminhoArquivo) else {
+    print("Não foi possível ler o arquivo.")
+    exit(1)
+}
+
+switch operacao {
+case .contagem:
+    print("Número de palavras: \(contagemPalavras(texto))")
+case .buscar:
+    guard CommandLine.arguments.count >= 4 else {
+        print("Uso: programa buscar <caminho do arquivo> <palavra>")
+        exit(1)
+    }
+    let palavra = CommandLine.arguments[3]
+    let posicoes = buscarPalavra(texto, palavra: palavra)
+    print("A palavra '\(palavra)' aparece nas posições: \(posicoes)")
+case .substituir:
+    guard CommandLine.arguments.count >= 5 else {
+        print("Uso: programa substituir <caminho do arquivo> <palavra alvo> <substituição>")
+        exit(1)
+    }
+    let alvo = CommandLine.arguments[3]
+    let substituicao = CommandLine.arguments[4]
+    let novoTexto = substituirPalavra(texto, alvo: alvo, substituicao: substituicao)
+    print(novoTexto)
+default:
+    print("Operação desconhecida.")
+    exit(1)
+}
