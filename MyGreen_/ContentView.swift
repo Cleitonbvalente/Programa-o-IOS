@@ -20,7 +20,7 @@ struct ContentView:
 import SwiftUI
 
 struct ConteudoView: View {
-    @State private var plantasFavoritas: [String] = []
+    @State private var plantasFavoritas: [Planta] = []
     @State private var pesquisaTexto: String = ""
     
     var plantas: [Planta] = [
@@ -68,7 +68,11 @@ struct ConteudoView: View {
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
                         ForEach(plantas) { planta in
                             NavigationLink(destination: DetalhesPlantaView(planta: planta)) {
-                                CartaoDePlantaView(nomePlanta: planta.nome, nomeCientifico: planta.nomeCienfitico, nomeImagem: planta.imagem)
+                                CartaoDePlantaView(nomePlanta: planta.nome,
+                                                   nomeCientifico: planta.nomeCienfitico,
+                                                   nomeImagem: planta.imagem,
+                                                   plantasFavoritas: $plantasFavoritas,
+                                                   planta: planta)
                             }
                         }
                     }
@@ -81,9 +85,15 @@ struct ConteudoView: View {
                     }
                     .foregroundColor(.black)
                     Spacer()
-                    BotaoDeNavegacaoView(nomeIcone: "house", rotulo: "Início")
+                    NavigationLink(destination: ContentView()) {
+                        BotaoDeNavegacaoView(nomeIcone: "house", rotulo: "Início")
+                            .foregroundColor(.black)
+                    }
                     Spacer()
-                    BotaoDeNavegacaoView(nomeIcone: "heart", rotulo: "Favoritos")
+                    NavigationLink(destination: FavoritosView(plantasFavoritas: $plantasFavoritas)) {
+                        BotaoDeNavegacaoView(nomeIcone: "heart", rotulo: "Favoritos")
+                            .foregroundColor(.black)
+                    }
                 }
                 .padding()
                 .background(Color(.gray).opacity(0.2))
@@ -97,36 +107,52 @@ struct CartaoDePlantaView: View {
     var nomePlanta: String
     var nomeCientifico: String
     var nomeImagem: String
+    @Binding var plantasFavoritas : [Planta]
     
     @State private var isFavorited = false
+    
+    var planta: Planta
+    
     var body: some View {
         VStack {
-            Image(nomeImagem)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 150)
-                .cornerRadius(8)
-                .shadow(radius: 5)
+            ZStack(alignment: .topTrailing) {
+                Image(nomeImagem)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 150)
+                    .cornerRadius(8)
+                    .shadow(radius: 5)
+                
+                Button(action: {
+                    isFavorited.toggle()
+                    
+                    if isFavorited {
+                        plantasFavoritas.append(planta)
+                    } else {
+                        if let index = plantasFavoritas.firstIndex(where: { $0.nome == planta.nome }) {
+                            plantasFavoritas.remove(at: index)
+                        }
+                    }
+                }) {
+                    Image(systemName: "heart.fill")
+                        .foregroundColor(isFavorited ? Color(hex: "#32CD32") : Color(hex: "#90EE90"))
+                        .padding(10)
+                        .scaleEffect(1.3)
+                }
+                .offset(x: -4, y: 4)
+            }
             
-            HStack {
+            VStack(alignment: .leading) {
                 Text(nomePlanta)
                     .font(.headline)
                     .padding(.top, 5)
                     .foregroundColor(.black)
                 
-                Spacer()
-                
-                Button(action: {
-                    isFavorited.toggle()
-                }) {
-                    Image(systemName: "heart.fill")
-                        .foregroundColor(isFavorited ? Color(hex: "#32CD32") : Color(hex: "#90EE90"))
-                }
+                Text(nomeCientifico)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
             }
-            
-            Text(nomeCientifico)
-                .font(.subheadline)
-                .foregroundColor(.gray)
+            .padding([.leading, .trailing])
         }
         .padding()
         .background(Color(.gray).opacity(0.1))

@@ -16,6 +16,7 @@
 		40D0868D2D1E72A50013E8CA /* MyGreen_UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D0868C2D1E72A50013E8CA /* MyGreen_UITestsLaunchTests.swift */; };
 		40D086A02D29049A0013E8CA /* MeuJardimView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D0869F2D29049A0013E8CA /* MeuJardimView.swift */; };
 		40D086A22D2E1C440013E8CA /* DetalhesPlantaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D086A12D2E1C440013E8CA /* DetalhesPlantaView.swift */; };
+		40D086A42D3231140013E8CA /* FavoritosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D086A32D3231140013E8CA /* FavoritosView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		40D0868C2D1E72A50013E8CA /* MyGreen_UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGreen_UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		40D0869F2D29049A0013E8CA /* MeuJardimView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeuJardimView.swift; sourceTree = "<group>"; };
 		40D086A12D2E1C440013E8CA /* DetalhesPlantaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalhesPlantaView.swift; sourceTree = "<group>"; };
+		40D086A32D3231140013E8CA /* FavoritosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritosView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			children = (
 				40D0866E2D1E72A40013E8CA /* MyGreen_App.swift */,
 				40D086702D1E72A40013E8CA /* ContentView.swift */,
+				40D086A32D3231140013E8CA /* FavoritosView.swift */,
 				40D086A12D2E1C440013E8CA /* DetalhesPlantaView.swift */,
 				40D086722D1E72A50013E8CA /* Assets.xcassets */,
 				40D0869F2D29049A0013E8CA /* MeuJardimView.swift */,
@@ -269,6 +272,7 @@
 				40D086712D1E72A40013E8CA /* ContentView.swift in Sources */,
 				40D0866F2D1E72A40013E8CA /* MyGreen_App.swift in Sources */,
 				40D086A02D29049A0013E8CA /* MeuJardimView.swift in Sources */,
+				40D086A42D3231140013E8CA /* FavoritosView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
