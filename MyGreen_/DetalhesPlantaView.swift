@@ -9,48 +9,66 @@ import SwiftUI
 
 struct DetalhesPlantaView: View {
     let planta: Planta
+    @Binding var plantasNoJardim: [Planta]
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                
-                Image(planta.imagem)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .cornerRadius(12)
-                    .shadow(radius: 5)
-                    .padding(.horizontal)
-                
-                VStack(alignment: .leading,spacing: 8) {
-                    Text("Descrição")
-                        .font(.title2)
-                        .bold()
-                        .foregroundColor(Color(hex: "#228B22"))
-                    Text(planta.descricao)
-                        .font(.body)
-                        .foregroundColor(.gray)
-                }
-                .padding(.horizontal)
-                
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Sobre")
-                        .font(.title2)
-                        .bold()
-                        .foregroundColor(Color(hex: "#228B22"))
+        VStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
                     
-                    VStack(spacing: 8) {
-                        LinhaDeInfo(titulo: "Toxidade", valor: planta.toxidade)
-                        LinhaDeInfo(titulo: "Erva Daninha ou Não", valor: planta.ervaDaninha)
-                        LinhaDeInfo(titulo: "Invasividade", valor: planta.invasividade)
-                        LinhaDeInfo(titulo: "Tipo de planta", valor: planta.tipoPlanta)
-                        LinhaDeInfo(titulo: "Vida Útil", valor: planta.vidaUtil)
-                        LinhaDeInfo(titulo: "Tempo de Plantio", valor: planta.tempoPlantio)
+                    Image(planta.imagem)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(12)
+                        .shadow(radius: 5)
+                        .padding(.horizontal)
+                    
+                    VStack(alignment: .leading,spacing: 8) {
+                        Text("Descrição")
+                            .font(.title2)
+                            .bold()
+                            .foregroundColor(Color(hex: "#32CD32"))
+                        Text(planta.descricao)
+                            .font(.body)
+                            .foregroundColor(.gray)
                     }
+                    .padding(.horizontal)
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Sobre")
+                            .font(.title2)
+                            .bold()
+                            .foregroundColor(Color(hex: "#32CD32"))
+                        
+                        VStack(spacing: 8) {
+                            LinhaDeInfo(titulo: "Toxidade", valor: planta.toxidade)
+                            LinhaDeInfo(titulo: "Erva Daninha ou Não", valor: planta.ervaDaninha)
+                            LinhaDeInfo(titulo: "Invasividade", valor: planta.invasividade)
+                            LinhaDeInfo(titulo: "Tipo de planta", valor: planta.tipoPlanta)
+                            LinhaDeInfo(titulo: "Vida Útil", valor: planta.vidaUtil)
+                            LinhaDeInfo(titulo: "Tempo de Plantio", valor: planta.tempoPlantio)
+                        }
+                    }
+                    .padding(.horizontal)
                 }
-                .padding(.horizontal)
+                .frame(maxWidth: .infinity)
             }
-            .padding(.top)
             
+            Spacer()
+            
+            
+            Button(action: {
+                plantasNoJardim.append(planta)
+            }) {
+                Text("Adicionar ao meu jardim")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity, minHeight: 60)
+                    .background(Color(hex: "32CD32"))
+                    .cornerRadius(12)
+            }
+            .padding(.horizontal)
+            .padding(.bottom)
         }
         .navigationTitle(planta.nome)
     }
@@ -90,9 +108,11 @@ struct Planta: Identifiable {
 
 
 struct DetalhesPlantaView_Previews: PreviewProvider {
+    @State static var plantasNoJardim: [Planta] = []
+    
     static var previews: some View {
         DetalhesPlantaView(planta: Planta(nome: "Zamioculcas", nomeCienfitico: "Zamioculcas zamiifolia",
-                                          descricao: "Zamiocultas é um gênero botânico, pertecente à família Araceae, que contém apenas a espécie Zamiocultas zamiifolia. A Zamioculcas zamiifolia, da família das Aráceas é uma planta originária da Tanzânia, na África.", imagem: "Zamioculta", toxidade: "Leve irritação na pele/olhos ao tocar e altamente tóxica quando ingerida", ervaDaninha: "Não", invasividade: "Não é invasiva", tipoPlanta: "Ornamental perene e suculenta", vidaUtil: "Cinco a dez anos ou mais", tempoPlantio: "Primavera ou início do verão"))
+                                          descricao: "Zamiocultas é um gênero botânico, pertecente à família Araceae, que contém apenas a espécie Zamiocultas zamiifolia. A Zamioculcas zamiifolia, da família das Aráceas é uma planta originária da Tanzânia, na África.", imagem: "Zamioculta", toxidade: "Leve irritação na pele/olhos ao tocar e altamente tóxica quando ingerida", ervaDaninha: "Não", invasividade: "Não é invasiva", tipoPlanta: "Ornamental perene e suculenta", vidaUtil: "Cinco a dez anos ou mais", tempoPlantio: "Primavera ou início do verão"), plantasNoJardim: .constant([]))
     }
 }
 

@@ -22,6 +22,7 @@ import SwiftUI
 struct ConteudoView: View {
     @State private var plantasFavoritas: [Planta] = []
     @State private var pesquisaTexto: String = ""
+    @State private var plantasNoJardim: [Planta] = []
     
     var plantas: [Planta] = [
         Planta(nome: "Zamiocultas", nomeCienfitico: "Zamioculcas zamiifolia", descricao: "Zamiocultas é um gênero botânico, pertencente à família Araceae, que contém apenas a espécie Zamiocultas zamiifolia, da família das Aráceas é uma planta originária da Tanzânia, na África.", imagem: "Zamioculta", toxidade: "Leve irritação na pele/olhos ao tocar e altamente tóxica quando ingerida", ervaDaninha: "Não", invasividade: "Não é invasiva", tipoPlanta: "Ornamental perene e suculenta", vidaUtil: "Cinco a dez anos ou mais", tempoPlantio: "Primavera ou início do verão"),
@@ -67,7 +68,7 @@ struct ConteudoView: View {
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
                         ForEach(plantas) { planta in
-                            NavigationLink(destination: DetalhesPlantaView(planta: planta)) {
+                            NavigationLink(destination: DetalhesPlantaView(planta: planta, plantasNoJardim: $plantasNoJardim)) {
                                 CartaoDePlantaView(nomePlanta: planta.nome,
                                                    nomeCientifico: planta.nomeCienfitico,
                                                    nomeImagem: planta.imagem,
@@ -80,7 +81,7 @@ struct ConteudoView: View {
                 }
                 
                 HStack {
-                    NavigationLink(destination: MeuJardimView()) {
+                    NavigationLink(destination: MeuJardimView(plantasNoJardim: $plantasNoJardim)) {
                         BotaoDeNavegacaoView(nomeIcone: "leaf", rotulo: "Meu jardim")
                     }
                     .foregroundColor(.black)
