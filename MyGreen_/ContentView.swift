@@ -46,22 +46,32 @@ struct ConteudoView: View {
                 }
                 .padding()
                 
-                HStack {
+                VStack {
                     TextField("Pesquisar plantas...", text: $pesquisaTexto)
                         .padding()
                         .background(Color(.gray).opacity(0.2))
                         .cornerRadius(8)
                         .padding(.horizontal)
                     
-                    Button(action: {
-                        
-                    }) {
-                        Image(systemName: "line.horizontal.3.decrease.circle")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .padding(.trailing)
-                            .foregroundColor(Color(hex: "#32CD32"))
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            
+                        }) {
+                            HStack {
+                                Text("Filtros")
+                                    .foregroundColor(Color(hex: "#008000"))
+                                    .font(.headline)
+                                
+                                Image(systemName: "line.horizontal.3.decrease.circle")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                                    .padding(.trailing)
+                                    .foregroundColor(Color(hex: "#008000"))
+                            }
+                        }
                     }
+                    .padding(.horizontal)
                 }
                 .padding(.top)
                 
@@ -135,15 +145,28 @@ struct CartaoDePlantaView: View {
                         }
                     }
                 }) {
-                    Image(systemName: "heart.fill")
-                        .foregroundColor(isFavorited ? Color(hex: "#32CD32") : Color(hex: "#90EE90"))
-                        .padding(10)
-                        .scaleEffect(1.3)
+                    ZStack {
+                        
+                        Image(systemName: "heart")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 16, height: 16)
+                            .foregroundColor(Color(hex: "008000"))
+                            .opacity(isFavorited ? 0 : 1)
+                        
+                        Image(systemName: isFavorited ? "heart.fill" : "heart")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 14, height: 14)
+                            .foregroundColor(isFavorited ? Color(hex: "008000") : Color(hex: "008000"))
+                    }
+                    .padding(10)
+                    .scaleEffect(1.3)
                 }
                 .offset(x: -4, y: 4)
             }
             
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 5) {
                 Text(nomePlanta)
                     .font(.headline)
                     .padding(.top, 5)
@@ -171,7 +194,7 @@ struct BotaoDeNavegacaoView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 24, height: 24)
-                .foregroundColor(Color(hex: "#32CD32"))
+                .foregroundColor(Color(hex: "#008000"))
             Text(rotulo)
                 .font(.footnote)
         }
