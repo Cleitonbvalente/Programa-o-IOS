@@ -27,11 +27,9 @@ struct FavoritosView: View {
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
                         ForEach(plantasFavoritas) { planta in
                             NavigationLink(destination: DetalhesPlantaView(planta: planta, plantasNoJardim: $plantasNoJardim)) {
-                                CartaoDePlantaView(nomePlanta: planta.nome,
-                                                   nomeCientifico: planta.nomeCienfitico,
-                                                   nomeImagem: planta.imagem,
-                                                   plantasFavoritas: $plantasFavoritas,
-                                                   planta: planta)
+                                CartaoDePlantaView(
+                                    plantasFavoritas: $plantasFavoritas,
+                                    planta: planta)
                             }
                         }
                     }

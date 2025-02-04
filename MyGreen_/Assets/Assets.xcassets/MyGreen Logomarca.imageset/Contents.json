@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "MyGreen Logomarca.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

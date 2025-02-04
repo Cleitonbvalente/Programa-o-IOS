@@ -25,7 +25,7 @@ struct MeuJardimView: View {
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
                         ForEach(plantasNoJardim) { planta in
-                            CartaoDePlantaView(nomePlanta: planta.nome, nomeCientifico: planta.nomeCienfitico, nomeImagem: planta.imagem, plantasFavoritas: .constant([]), planta: planta)
+                            CartaoDePlantaView(plantasFavoritas: .constant([]), planta: planta)
                         }
                     }
                     .padding()
