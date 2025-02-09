@@ -30,101 +30,45 @@ struct DetalhesPlantaView: View {
                         .bold()
                         .foregroundColor(Color("FontGreenDark"))
                 }
+                .listRowBackground(Color.clear)
                 
                 Section {
-                    HStack{
-                        Text("Comida")
-                        Spacer()
-                        Text("Pizza")
-                    }
-                    .listRowBackground(Color.gray.opacity(0.1))
-                    HStack{
-                        Text("Bebida")
-                        Spacer()
-                        Text("Achocolatado")
-                    }
+                    let detalhes: [(titulo: String, valor: String)] = [
+                        ("Toxidade", planta.toxidade),
+                        ("Erva Daninha", planta.ervaDaninha),
+                        ("Invasividade", planta.invasividade),
+                        ("Tipo", planta.tipoPlanta),
+                        ("Vida Útil", planta.vidaUtil),
+                        ("Tempo de Plantio", planta.tempoPlantio)
+                    ]
                     
-                    HStack{
-                        Text("Refri")
-                        Spacer()
-                        Text("Frevo de Cola")
+                    ForEach(detalhes.indices, id: \.self) { index in
+                        let corFundo = index.isMultiple(of: 2) ? Color.gray.opacity(0.2) : Color.white
+                        LinhaDeInfo(titulo: detalhes[index].titulo, valor: detalhes[index].valor, corFundo: corFundo)
                     }
-                    .listRowBackground(Color.gray.opacity(0.1))
                 } header: {
-                    Text("Sobre")
+                    Text("Detalhes")
                         .font(.title2)
                         .bold()
                         .foregroundColor(Color("FontGreenDark"))
                 }
-                
-                
-                //                VStack(alignment: .leading,spacing: 8) {
-                //                    Text("Descrição")
-                //                        .font(.title2)
-                //                        .bold()
-                //                        .foregroundColor(Color("FontGreenDark"))
-                //                    Text(planta.descricao)
-                //                        .font(.body)
-                //                        .foregroundColor(.gray)
-                //                }
+                .listRowBackground(Color.clear)
             }
-            //            ScrollView {
-            //                VStack(alignment: .leading, spacing: 20) {
-            //
-            //                    Image(planta.imagem)
-            //                        .resizable()
-            //                        .aspectRatio(contentMode: .fit)
-            //                        .cornerRadius(12)
-            //                        .shadow(radius: 5)
-            //                        .padding(.horizontal)
-            //
-            //                    VStack(alignment: .leading,spacing: 8) {
-            //                        Text("Descrição")
-            //                            .font(.title2)
-            //                            .bold()
-            //                            .foregroundColor(Color("FontGreenDark"))
-            //                        Text(planta.descricao)
-            //                            .font(.body)
-            //                            .foregroundColor(.gray)
-            //                    }
-            //                    .padding(.horizontal)
-            //
-            //                    VStack(alignment: .leading, spacing: 8) {
-            //                        Text("Sobre")
-            //                            .font(.title2)
-            //                            .bold()
-            //                            .foregroundColor(Color("FontGreenDark"))
-            //
-            ////                        VStack(spacing: 8) {
-            ////                            LinhaDeInfo(titulo: "Toxidade", valor: planta.toxidade)
-            ////                            LinhaDeInfo(titulo: "Erva Daninha ou Não", valor: planta.ervaDaninha)
-            ////                            LinhaDeInfo(titulo: "Invasividade", valor: planta.invasividade)
-            ////                            LinhaDeInfo(titulo: "Tipo de planta", valor: planta.tipoPlanta)
-            ////                            LinhaDeInfo(titulo: "Vida Útil", valor: planta.vidaUtil)
-            ////                            LinhaDeInfo(titulo: "Tempo de Plantio", valor: planta.tempoPlantio)
-            ////                        }
-            //                    }
-            //                    .padding(.horizontal)
-            //                }
-            //                .frame(maxWidth: .infinity)
-            //            }
-            
-            Spacer()
             
             
             Button(action: {
                 plantasNoJardim.append(planta)
             }) {
-                Text("Adicionar ao meu jardim")
+                Text("Adicionar ao Meu Jardim")
                     .font(.headline)
                     .foregroundColor(.white)
-                    .frame(maxWidth: .infinity, minHeight: 60)
+                    .frame(maxWidth: .infinity, minHeight: 50)
                     .background(Color("FontGreenDark"))
                     .cornerRadius(12)
+                    .padding()
             }
-            .padding(.horizontal)
-            .padding(.bottom)
         }
+        .background(Color.white)
         .navigationTitle(planta.nome)
     }
 }
@@ -132,6 +76,7 @@ struct DetalhesPlantaView: View {
 struct LinhaDeInfo: View {
     var titulo: String
     var valor: String
+    var corFundo: Color
     
     var body: some View {
         HStack {
@@ -141,9 +86,11 @@ struct LinhaDeInfo: View {
             Spacer()
             Text(valor)
                 .font(.body)
-                .foregroundColor(.gray)
+                .foregroundColor(.black)
         }
         .padding(.vertical, 5)
+        .background(corFundo)
+        .cornerRadius(8)
     }
 }
 

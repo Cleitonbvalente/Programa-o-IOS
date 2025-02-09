@@ -55,7 +55,7 @@ struct HomeView: View {
                 }
                 
                 ScrollView {
-                    LazyVGrid(columns: [GridItem(.flexible(), spacing: 0), GridItem(.flexible())], spacing: 0) {
+                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 0) {
                         ForEach(viewModel.plantas) { planta in
                             NavigationLink(destination: DetalhesPlantaView(planta: planta, plantasNoJardim: $plantasNoJardim)) {
                                 CartaoDePlantaView( plantasFavoritas: $viewModel.plantasFavoritas, planta: planta
