@@ -2,7 +2,7 @@
 //  CartaoDePlantaView.swift
 //  MyGreen_
 //
-//  Created by Caio de Almeida Pessoa on 29/01/25.
+//  Created by iredefbmac on 29/01/25.
 //
 
 
@@ -25,7 +25,7 @@ struct CartaoDePlantaView: View {
                 Image(nomeImagem)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(height: 180)
+                    .frame(height: 180)        
                     .cornerRadius(8)
                     .clipped()
                 
