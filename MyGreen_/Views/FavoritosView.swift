@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FavoritosView: View {
     @Binding var plantasFavoritas: [Planta]
-    @State private var plantasNoJardim: [Planta] = []
+    @State private var plantasNoJardim: [Planta] = [] // Lista de plantas no jardim
     
     var body: some View {
         VStack {
@@ -29,7 +29,9 @@ struct FavoritosView: View {
                             NavigationLink(destination: DetalhesPlantaView(planta: planta, plantasNoJardim: $plantasNoJardim)) {
                                 CartaoDePlantaView(
                                     plantasFavoritas: $plantasFavoritas,
-                                    planta: planta)
+                                    plantasNoJardim: $plantasNoJardim, // Passando a lista de plantas no jardim
+                                    planta: planta
+                                )
                             }
                         }
                     }
@@ -38,10 +40,8 @@ struct FavoritosView: View {
             }
         }
         .navigationTitle("Favoritos")
-        
     }
 }
-
 struct FavoritosView_Previews: PreviewProvider {
     @State static var plantasFavoritas: [Planta] = []
     
