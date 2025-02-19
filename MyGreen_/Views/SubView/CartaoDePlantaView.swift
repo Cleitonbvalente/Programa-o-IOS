@@ -1,9 +1,9 @@
 //
-//  CartaoDePlantaView.swift
+//  CartaoDePlantaView
 //  MyGreen_
 //
-//  Created by iredefbmac on 29/01/25.
-//
+//  Created by iredefbmac_30 on 27/12/24.
+//import SwiftUI
 
 
 import SwiftUI
@@ -12,11 +12,19 @@ struct CartaoDePlantaView: View {
     var nomePlanta: String { planta.nome }
     var nomeCientifico: String { planta.nomeCienfitico }
     var nomeImagem: String { planta.imagem }
-    @Binding var plantasFavoritas: [Planta]
-    @Binding var plantasNoJardim: [Planta] // Nova binding para a lista de plantas no jardim
-    @State private var isFavorited = false
     
+    @Binding var plantasFavoritas: [Planta]
+    @Binding var plantasNoJardim: [Planta]
+    @State private var plantaRegada: Bool = false
     var planta: Planta
+    
+    var isFavorited: Bool {
+        plantasFavoritas.contains { $0.id == planta.id }
+    }
+    
+    var plantaEstaNoJardim: Bool {
+        plantasNoJardim.contains { $0.id == planta.id }
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -29,7 +37,6 @@ struct CartaoDePlantaView: View {
                     .cornerRadius(8)
                     .clipped()
                 
-                // Overlay com nome e nome científico
                 Rectangle()
                     .fill(Color.green.opacity(0.6))
                     .frame(height: 50)
@@ -39,25 +46,34 @@ struct CartaoDePlantaView: View {
                 VStack {
                     Spacer()
                     HStack {
-                        // Nome da planta
                         Text(nomePlanta)
                             .font(.headline)
                             .foregroundColor(.white)
                             .lineLimit(1)
                             .truncationMode(.tail)
                         
-                        // Ícone de água (se a planta foi regada e está no Meu Jardim)
-                        if plantasNoJardim.contains(where: { $0.id == planta.id }) && planta.regada {
-                            Image(systemName: "drop.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 16, height: 16)
-                                .foregroundColor(.blue)
-                                .padding(.leading, 4)
+                        if plantaEstaNoJardim {
+                            Button(action: {
+                                withAnimation {
+                                    plantaRegada.toggle()
+                                }
+                            }) {
+                                Image(systemName: "drop.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 16, height: 16)
+                                    .foregroundColor(plantaRegada ? .blue : .clear)
+                                    .background(
+                                        Circle()
+                                            .stroke(Color.blue, lineWidth: 1)
+                                            .background(Circle().fill(plantaRegada ? Color.blue : Color.clear))
+                                    )
+                                    .padding(.leading, 4)
+                            }
                         }
                     }
                     .padding(.bottom, 2)
-                    
+
                     Text(nomeCientifico)
                         .font(.subheadline)
                         .foregroundColor(.white)
@@ -67,18 +83,15 @@ struct CartaoDePlantaView: View {
                 }
                 .padding(.horizontal)
                 
-                // Ícone de coração (favoritos)
                 HStack {
                     Spacer()
                     VStack {
                         Button(action: {
-                            isFavorited.toggle()
-                            
-                            if isFavorited {
-                                plantasFavoritas.append(planta)
-                            } else {
-                                if let index = plantasFavoritas.firstIndex(where: { $0.id == planta.id }) {
-                                    plantasFavoritas.remove(at: index)
+                            withAnimation {
+                                if isFavorited {
+                                    plantasFavoritas.removeAll { $0.id == planta.id }
+                                } else {
+                                    plantasFavoritas.append(planta)
                                 }
                             }
                         }) {
@@ -98,8 +111,12 @@ struct CartaoDePlantaView: View {
         .padding(.horizontal, 8)
         .padding(.bottom, 16)
         .onAppear {
-            // Atualiza o estado do ícone do coração ao aparecer
-            isFavorited = plantasFavoritas.contains { $0.id == planta.id }
+            plantaRegada = planta.regada
+        }
+        .onChange(of: plantaRegada) { oldValue, newValue in
+            if let index = plantasNoJardim.firstIndex(where: { $0.id == planta.id }) {
+                plantasNoJardim[index].regada = newValue
+            }
         }
     }
 }

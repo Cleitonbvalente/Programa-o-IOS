@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct HomeView: View {
     @State private var pesquisaTexto: String = ""
     @State private var plantasNoJardim: [Planta] = []
@@ -17,36 +15,32 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             TabView {
-                // Aba Meu Jardim
                 MeuJardimView(plantasNoJardim: $plantasNoJardim)
                     .tabItem {
                         Image(systemName: "leaf")
                         Text("Meu Jardim")
                     }
                 
-                // Aba Início
                 VStack(spacing: 20) {
-                    // Logo do MyGreen
                     HStack {
-                        Image("MyGreen Logomarca") // Substitua pelo nome da sua imagem
+                        Image("MyGreen Logomarca")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 100)
                     }
                     
-                    // Campo de pesquisa
                     VStack {
                         TextField("Pesquisar plantas...", text: $pesquisaTexto)
                             .padding()
-                            .background(Color(.gray).opacity(0.2))
+                            .background(Color(hex: "#F5F5DC"))
                             .cornerRadius(8)
                             .padding(.horizontal)
+                            .foregroundColor(Color.gray)
                         
-                        // Botão de filtros (opcional)
                         HStack {
                             Spacer()
                             Button(action: {
-                                // Ação do filtro
+
                             }) {
                                 HStack {
                                     Text("Filtros")
@@ -63,7 +57,7 @@ struct HomeView: View {
                         .padding(.horizontal)
                     }
                     
-                    // Lista de plantas
+
                     ScrollView {
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 0) {
                             ForEach(viewModel.plantas) { planta in
@@ -84,14 +78,13 @@ struct HomeView: View {
                     Text("Início")
                 }
                 
-                // Aba Favoritos
                 FavoritosView(plantasFavoritas: $viewModel.plantasFavoritas)
                     .tabItem {
                         Image(systemName: "heart")
                         Text("Favoritos")
                     }
             }
-            .accentColor(Color("FontGreenDark")) // Cor de destaque para as abas
+            .accentColor(Color("FontGreenDark"))
         }
     }
 }

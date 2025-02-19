@@ -7,30 +7,24 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct MeuJardimView: View {
     @Binding var plantasNoJardim: [Planta]
     @State private var pesquisaTexto: String = ""
     
     var body: some View {
         VStack(spacing: 16) {
-            // Título
             Text("Meu Jardim")
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .padding(.top)
             
-            // Campo de pesquisa
             TextField("Pesquisar minhas plantas...", text: $pesquisaTexto)
                 .padding()
-                .background(Color(.gray).opacity(0.2))
+                .background(Color(hex: "#F5F5DC"))
                 .cornerRadius(8)
                 .padding(.horizontal)
             
-            // Lista de plantas ou mensagem centralizada
             if plantasNoJardim.isEmpty {
-                // Mensagem centralizada
                 Spacer()
                 Text("Nenhuma planta no jardim.")
                     .foregroundColor(.black)
@@ -44,7 +38,7 @@ struct MeuJardimView: View {
                         }) { planta in
                             NavigationLink(destination: DetalhesPlantaView(planta: planta, plantasNoJardim: $plantasNoJardim)) {
                                 CartaoDePlantaView(
-                                    plantasFavoritas: .constant([]), // Passando uma lista vazia de favoritos (ou a lista real, se necessário)
+                                    plantasFavoritas: .constant([]),
                                     plantasNoJardim: $plantasNoJardim,
                                     planta: planta
                                 )

@@ -7,32 +7,26 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct DetalhesPlantaView: View {
     let planta: Planta
     @Binding var plantasNoJardim: [Planta]
     
-    // Verifica se a planta já está no jardim
     private var plantaEstaNoJardim: Bool {
         plantasNoJardim.contains { $0.id == planta.id }
     }
     
     var body: some View {
-        VStack(spacing: 0) { // Contêiner principal
-            // Conteúdo rolável
+        VStack(spacing: 0) {
             ScrollView {
                 VStack(spacing: 20) {
-                    // Imagem (ocupa toda a largura)
                     Image(planta.imagem)
                         .resizable()
                         .scaledToFit()
-                        .frame(maxWidth: .infinity) // Ocupa toda a largura
+                        .frame(maxWidth: .infinity)
                         .cornerRadius(12)
                         .shadow(radius: 5)
-                        .padding(.horizontal, 0) // Remove o padding horizontal
+                        .padding(.horizontal, 0)
                     
-                    // Descrição
                     VStack(alignment: .leading, spacing: 10) {
                         Text("Descrição")
                             .font(.title2)
@@ -43,9 +37,8 @@ struct DetalhesPlantaView: View {
                             .font(.body)
                             .foregroundColor(.gray)
                     }
-                    .padding(.horizontal) // Adiciona padding apenas nas laterais
+                    .padding(.horizontal)
                     
-                    // Detalhes
                     VStack(alignment: .leading, spacing: 10) {
                         Text("Detalhes")
                             .font(.title2)
@@ -66,19 +59,16 @@ struct DetalhesPlantaView: View {
                             LinhaDeInfo(titulo: detalhes[index].titulo, valor: detalhes[index].valor, corFundo: corFundo)
                         }
                     }
-                    .padding(.horizontal) // Adiciona padding apenas nas laterais
+                    .padding(.horizontal)
                 }
-                .padding(.vertical) // Adiciona padding vertical
-                .padding(.bottom, 100) // Adiciona espaço para o botão
+                .padding(.vertical)
+                .padding(.bottom, 100)
             }
             
-            // Botão fixo na parte inferior
             Button(action: {
                 if plantaEstaNoJardim {
-                    // Remove a planta do jardim
                     plantasNoJardim.removeAll { $0.id == planta.id }
                 } else {
-                    // Adiciona a planta ao jardim
                     plantasNoJardim.append(planta)
                 }
             }) {
@@ -90,8 +80,8 @@ struct DetalhesPlantaView: View {
                     .cornerRadius(12)
                     .padding()
             }
-            .padding(.horizontal) // Adiciona padding apenas nas laterais
-            .background(Color("CorDeFundo")) // Usando uma cor personalizada do Asset Catalog
+            .padding(.horizontal)
+            .background(Color("CorDeFundo"))
         }
         .navigationTitle(planta.nome)
     }
