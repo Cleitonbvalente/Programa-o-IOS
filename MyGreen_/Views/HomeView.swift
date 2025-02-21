@@ -94,3 +94,4 @@ struct ConteudoView_Previews: PreviewProvider {
         HomeView()
     }
 }
+     
