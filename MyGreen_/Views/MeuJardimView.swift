@@ -36,13 +36,12 @@ struct MeuJardimView: View {
                         ForEach(plantasNoJardim.filter {
                             pesquisaTexto.isEmpty || $0.nome.localizedCaseInsensitiveContains(pesquisaTexto)
                         }) { planta in
-                            NavigationLink(destination: DetalhesPlantaView(planta: planta, plantasNoJardim: $plantasNoJardim)) {
-                                CartaoDePlantaView(
-                                    plantasFavoritas: .constant([]),
-                                    plantasNoJardim: $plantasNoJardim,
-                                    planta: planta
-                                )
-                            }
+                            CartaoDePlantaView(
+                                plantasFavoritas: .constant([]),
+                                plantasNoJardim: $plantasNoJardim,
+                                planta: planta,
+                                isMeuJardim: true
+                            )
                         }
                     }
                     .padding()
@@ -52,10 +51,3 @@ struct MeuJardimView: View {
         .navigationTitle("Meu Jardim")
     }
 }
-struct MeuJardimView_Previews: PreviewProvider {
-    static var previews: some View {
-        MeuJardimView(plantasNoJardim: .constant([]))
-    }
-}
-
-

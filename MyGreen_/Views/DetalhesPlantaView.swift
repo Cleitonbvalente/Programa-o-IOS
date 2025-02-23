@@ -28,14 +28,14 @@ struct DetalhesPlantaView: View {
                         .padding(.horizontal, 0)
                     
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("Descrição")
+                        Text("Sobre")
                             .font(.title2)
                             .bold()
                             .foregroundColor(Color("FontGreenDark"))
                         
                         Text(planta.descricao)
                             .font(.body)
-                            .foregroundColor(.gray)
+                            .foregroundColor(.black)
                     }
                     .padding(.horizontal)
                     
@@ -55,8 +55,29 @@ struct DetalhesPlantaView: View {
                         ]
                         
                         ForEach(detalhes.indices, id: \.self) { index in
-                            let corFundo = index.isMultiple(of: 2) ? Color.gray.opacity(0.2) : Color.white
+                            let corFundo = index.isMultiple(of: 2) ? Color.gray.opacity(0.1) : Color.white
                             LinhaDeInfo(titulo: detalhes[index].titulo, valor: detalhes[index].valor, corFundo: corFundo)
+                        }
+                    }
+                    .padding(.horizontal)
+                    
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Classificação Científica")
+                            .font(.title2)
+                            .bold()
+                            .foregroundColor(Color("FontGreenDark"))
+                        
+                        let classificacaoCientifica: [(titulo: String, valor: String)] = [
+                            ("Gênero", planta.genero),
+                            ("Família", planta.familia),
+                            ("Ordem", planta.ordem),
+                            ("Classe", planta.classe),
+                            ("Filo", planta.filo)
+                        ]
+                        
+                        ForEach(classificacaoCientifica.indices, id: \.self) { index in
+                            let corFundo = index.isMultiple(of: 2) ? Color.gray.opacity(0.1) : Color.white
+                            LinhaDeInfo(titulo: classificacaoCientifica[index].titulo, valor: classificacaoCientifica[index].valor, corFundo: corFundo)
                         }
                     }
                     .padding(.horizontal)
@@ -86,6 +107,7 @@ struct DetalhesPlantaView: View {
         .navigationTitle(planta.nome)
     }
 }
+
 struct LinhaDeInfo: View {
     var titulo: String
     var valor: String
@@ -120,14 +142,73 @@ struct Planta: Identifiable {
     let tipoPlanta: String
     let vidaUtil: String
     let tempoPlantio: String
+    
+    let genero: String
+    let familia: String
+    let ordem: String
+    let classe: String
+    let filo: String
+    
+    init(
+        nome: String,
+        nomeCienfitico: String,
+        descricao: String,
+        imagem: String,
+        regada: Bool = false,
+        toxidade: String,
+        ervaDaninha: String,
+        invasividade: String,
+        tipoPlanta: String,
+        vidaUtil: String,
+        tempoPlantio: String,
+        genero: String,
+        familia: String,
+        ordem: String,
+        classe: String,
+        filo: String
+    ) {
+        self.nome = nome
+        self.nomeCienfitico = nomeCienfitico
+        self.descricao = descricao
+        self.imagem = imagem
+        self.regada = regada
+        self.toxidade = toxidade
+        self.ervaDaninha = ervaDaninha
+        self.invasividade = invasividade
+        self.tipoPlanta = tipoPlanta
+        self.vidaUtil = vidaUtil
+        self.tempoPlantio = tempoPlantio
+        self.genero = genero
+        self.familia = familia
+        self.ordem = ordem
+        self.classe = classe
+        self.filo = filo
+    }
 }
-
 
 struct DetalhesPlantaView_Previews: PreviewProvider {
     @State static var plantasNoJardim: [Planta] = []
     
     static var previews: some View {
-        DetalhesPlantaView(planta: Planta(nome: "Zamioculcas", nomeCienfitico: "Zamioculcas zamiifolia",
-                                          descricao: "Zamiocultas é um gênero botânico, pertecente à família Araceae, que contém apenas a espécie Zamiocultas zamiifolia. A Zamioculcas zamiifolia, da família das Aráceas é uma planta originária da Tanzânia, na África.", imagem: "Zamioculta", toxidade: "Leve irritação na pele/olhos ao tocar e altamente tóxica quando ingerida", ervaDaninha: "Não", invasividade: "Não é invasiva", tipoPlanta: "Ornamental perene e suculenta", vidaUtil: "Cinco a dez anos ou mais", tempoPlantio: "Primavera ou início do verão"), plantasNoJardim: .constant([]))
+        DetalhesPlantaView(
+            planta: Planta(
+                nome: "Zamiocultas",
+                nomeCienfitico: "Zamioculcas zamiifolia",
+                descricao: "Zamiocultas é um gênero botânico, pertencente à família Araceae, que contém apenas a espécie Zamiocultas zamiifolia, da família das Aráceas é uma planta originária da Tanzânia, na África.",
+                imagem: "Zamioculta",
+                toxidade: "Leve irritação na pele/olhos ao tocar e altamente tóxica quando ingerida",
+                ervaDaninha: "Não",
+                invasividade: "Não é invasiva",
+                tipoPlanta: "Ornamental perene e suculenta",
+                vidaUtil: "Cinco a dez anos ou mais",
+                tempoPlantio: "Primavera ou início do verão",
+                genero: "Zamioculcas",
+                familia: "Araceae",
+                ordem: "Alismatales",
+                classe: "Liliopsida",
+                filo: "Angiosperma"
+            ),
+            plantasNoJardim: .constant([])
+        )
     }
 }

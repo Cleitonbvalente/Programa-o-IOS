@@ -30,7 +30,7 @@ struct FavoritosView: View {
                                 CartaoDePlantaView(
                                     plantasFavoritas: $plantasFavoritas,
                                     plantasNoJardim: $plantasNoJardim,
-                                    planta: planta
+                                    planta: planta, isMeuJardim: false
                                 )
                             }
                         }
@@ -42,6 +42,7 @@ struct FavoritosView: View {
         .navigationTitle("Favoritos")
     }
 }
+
 struct FavoritosView_Previews: PreviewProvider {
     @State static var plantasFavoritas: [Planta] = []
     

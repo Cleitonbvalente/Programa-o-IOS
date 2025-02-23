@@ -8,6 +8,8 @@
 import SwiftUI
 
 
+import SwiftUI
+
 struct PlantaRegadaView: View {
     @Environment(\.presentationMode) var presentationMode
     var planta: Planta
@@ -33,7 +35,7 @@ struct PlantaRegadaView: View {
                 }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 10)
-                .background(Color("FontGreenDark"))
+                .background(Color("FontGreenDark").opacity(0.8))
                 .cornerRadius(12)
                 .padding(.top, 40)
                 
@@ -52,7 +54,7 @@ struct PlantaRegadaView: View {
                             .foregroundColor(.white)
                     }
                     .padding()
-                    .background(Color("FontGreenDark"))
+                    .background(Color("FontGreenDark").opacity(0.8))
                     .cornerRadius(12)
                     
                     HStack {
@@ -66,7 +68,7 @@ struct PlantaRegadaView: View {
                             .foregroundColor(.white)
                     }
                     .padding()
-                    .background(Color("FontGreenDark"))
+                    .background(Color("FontGreenDark").opacity(0.8))
                     .cornerRadius(12)
                 }
                 .padding(.leading, 200)
@@ -75,7 +77,6 @@ struct PlantaRegadaView: View {
                 Spacer()
                 
                 Button(action: {
-                    
                     presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("Planta Regada")
@@ -90,14 +91,32 @@ struct PlantaRegadaView: View {
             }
         }
         #if os(iOS)
-        .navigationBarHidden(true)
+        .navigationTitle(planta.nome)
         #endif
     }
 }
 
-
 struct PlantaRegadaView_Previews: PreviewProvider {
     static var previews: some View {
-        PlantaRegadaView(planta: Planta(nome: "Zamioculta", nomeCienfitico: "Zamioculcas zamiifolia", descricao: "Descrição da planta", imagem: "Zamioculta", toxidade: "Leve", ervaDaninha: "Não", invasividade: "Não", tipoPlanta: "Ornamental", vidaUtil: "5-10 anos", tempoPlantio: "Primavera"))
+        PlantaRegadaView(
+            planta: Planta(
+                nome: "Zamioculta",
+                nomeCienfitico: "Zamioculcas zamiifolia",
+                descricao: "Descrição da planta",
+                imagem: "Zamioculta",
+                toxidade: "Leve",
+                ervaDaninha: "Não",
+                invasividade: "Não",
+                tipoPlanta: "Ornamental",
+                vidaUtil: "5-10 anos",
+                tempoPlantio: "Primavera",
+                genero: "Zamioculcas",
+                familia: "Araceae",
+                ordem: "Alismatales",
+                classe: "Liliopsida",
+                filo: "Angiosperma"
+            )
+        )
     }
 }
+

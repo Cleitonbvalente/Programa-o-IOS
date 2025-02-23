@@ -29,45 +29,39 @@ struct HomeView: View {
                             .frame(width: 100)
                     }
                     
-                    VStack {
-                        TextField("Pesquisar plantas...", text: $pesquisaTexto)
-                            .padding()
-                            .background(Color(hex: "#F5F5DC"))
-                            .cornerRadius(8)
-                            .padding(.horizontal)
-                            .foregroundColor(Color.gray)
-                        
-                        HStack {
-                            Spacer()
-                            Button(action: {
-
-                            }) {
-                                HStack {
-                                    Text("Filtros")
-                                        .foregroundColor(Color("FontGreenDark"))
-                                        .font(.custom("San Francisco", size: 20))
-                                    Image(systemName: "line.horizontal.3.decrease.circle")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 24)
-                                        .foregroundColor(Color("FontGreenDark"))
-                                }
+                    TextField("Pesquisar plantas...", text: $pesquisaTexto)
+                        .padding()
+                        .background(Color(hex: "#F5F5DC"))
+                        .cornerRadius(8)
+                        .padding(.horizontal)
+                        .foregroundColor(Color.gray)
+                    
+                    HStack {
+                        Spacer()
+                        Button(action: {}) {
+                            HStack {
+                                Text("Filtros")
+                                    .foregroundColor(Color("FontGreenDark"))
+                                    .font(.custom("San Francisco", size: 20))
+                                Image(systemName: "line.horizontal.3.decrease.circle")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 24)
+                                    .foregroundColor(Color("FontGreenDark"))
                             }
                         }
-                        .padding(.horizontal)
                     }
+                    .padding(.horizontal)
                     
-
                     ScrollView {
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 0) {
                             ForEach(viewModel.plantas) { planta in
-                                NavigationLink(destination: DetalhesPlantaView(planta: planta, plantasNoJardim: $plantasNoJardim)) {
-                                    CartaoDePlantaView(
-                                        plantasFavoritas: $viewModel.plantasFavoritas,
-                                        plantasNoJardim: $plantasNoJardim,
-                                        planta: planta
-                                    )
-                                }
+                                CartaoDePlantaView(
+                                    plantasFavoritas: $viewModel.plantasFavoritas,
+                                    plantasNoJardim: $plantasNoJardim,
+                                    planta: planta,
+                                    isMeuJardim: false
+                                )
                             }
                         }
                         .padding(8)
@@ -88,7 +82,6 @@ struct HomeView: View {
         }
     }
 }
-
 struct ConteudoView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
