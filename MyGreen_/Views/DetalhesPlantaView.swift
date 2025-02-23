@@ -7,12 +7,38 @@
 
 import SwiftUI
 
+
+struct DificuldadeIcone: View {
+    let nivel: Int
+    
+    var body: some View {
+        HStack(spacing: 4) {
+            ForEach(1..<4) { index in
+                Image(systemName: index <= nivel ? "leaf.fill" : "leaf")
+                    .foregroundColor(index <= nivel ? Color("FontGreenDark") : Color.gray)
+            }
+        }
+        .font(.system(size: 20))
+        .frame(maxWidth: .infinity, alignment: .center)
+    }
+}
+
 struct DetalhesPlantaView: View {
     let planta: Planta
     @Binding var plantasNoJardim: [Planta]
     
     private var plantaEstaNoJardim: Bool {
         plantasNoJardim.contains { $0.id == planta.id }
+    }
+    
+    private func calcularNivelDificuldade(resistencia: String, manutencao: String) -> Int {
+        if resistencia == "Alta" && manutencao == "Baixa" {
+            return 1
+        } else if resistencia == "Média" && manutencao == "Média" {
+            return 2
+        } else {
+            return 3
+        }
     }
     
     var body: some View {
@@ -79,6 +105,42 @@ struct DetalhesPlantaView: View {
                             let corFundo = index.isMultiple(of: 2) ? Color.gray.opacity(0.1) : Color.white
                             LinhaDeInfo(titulo: classificacaoCientifica[index].titulo, valor: classificacaoCientifica[index].valor, corFundo: corFundo)
                         }
+                    }
+                    .padding(.horizontal)
+                    
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Dificuldade")
+                            .font(.title2)
+                            .bold()
+                            .foregroundColor(Color("FontGreenDark"))
+                        
+                        DificuldadeIcone(nivel: calcularNivelDificuldade(resistencia: planta.resistencia, manutencao: planta.manutencao))
+                            .padding(.vertical, 8)
+                        
+                        HStack(spacing: 10) {
+                            VStack(alignment: .center, spacing: 4) {
+                                Text("Resistência")
+                                    .font(.headline)
+                                    .foregroundColor(.black)
+                                Text(planta.resistencia)
+                                    .font(.body)
+                                    .foregroundColor(.black)
+                            }
+                            
+                            Text("|")
+                                .font(.headline)
+                                .foregroundColor(Color.black)
+                            
+                            VStack(alignment: .center, spacing: 4) {
+                                Text("Manutenção")
+                                    .font(.headline)
+                                    .foregroundColor(.black)
+                                Text(planta.manutencao)
+                                    .font(.body)
+                                    .foregroundColor(.black)
+                            }
+                        }
+                        .frame(maxWidth: .infinity, alignment: .center)
                     }
                     .padding(.horizontal)
                 }
@@ -149,6 +211,9 @@ struct Planta: Identifiable {
     let classe: String
     let filo: String
     
+    let resistencia: String
+    let manutencao: String
+    
     init(
         nome: String,
         nomeCienfitico: String,
@@ -165,7 +230,9 @@ struct Planta: Identifiable {
         familia: String,
         ordem: String,
         classe: String,
-        filo: String
+        filo: String,
+        resistencia: String,
+        manutencao: String
     ) {
         self.nome = nome
         self.nomeCienfitico = nomeCienfitico
@@ -183,8 +250,11 @@ struct Planta: Identifiable {
         self.ordem = ordem
         self.classe = classe
         self.filo = filo
+        self.resistencia = resistencia
+        self.manutencao = manutencao
     }
 }
+
 
 struct DetalhesPlantaView_Previews: PreviewProvider {
     @State static var plantasNoJardim: [Planta] = []
@@ -206,7 +276,9 @@ struct DetalhesPlantaView_Previews: PreviewProvider {
                 familia: "Araceae",
                 ordem: "Alismatales",
                 classe: "Liliopsida",
-                filo: "Angiosperma"
+                filo: "Angiosperma",
+                resistencia: "Alta",
+                manutencao: "Baixa"
             ),
             plantasNoJardim: .constant([])
         )

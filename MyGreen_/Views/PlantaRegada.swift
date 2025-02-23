@@ -114,7 +114,9 @@ struct PlantaRegadaView_Previews: PreviewProvider {
                 familia: "Araceae",
                 ordem: "Alismatales",
                 classe: "Liliopsida",
-                filo: "Angiosperma"
+                filo: "Angiosperma",
+                resistencia: "Alta", // Novo campo
+                manutencao: "Baixa" // Novo campo
             )
         )
     }

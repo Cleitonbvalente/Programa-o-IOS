@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 class HomeViewModel: ObservableObject {
     
     // Lista de plantas disponíveis
@@ -40,7 +38,9 @@ class HomeViewModel: ObservableObject {
                 familia: "Araceae", // Novo campo
                 ordem: "Alismatales", // Novo campo
                 classe: "Liliopsida", // Novo campo
-                filo: "Angiosperma" // Novo campo
+                filo: "Angiosperma", // Novo campo
+                resistencia: "Alta", // Novo campo
+                manutencao: "Baixa" // Novo campo
             ),
             Planta(
                 nome: "Jibóia-verde",
@@ -57,7 +57,9 @@ class HomeViewModel: ObservableObject {
                 familia: "Araceae", // Novo campo
                 ordem: "Alismatales", // Novo campo
                 classe: "Liliopsida", // Novo campo
-                filo: "Angiosperma" // Novo campo
+                filo: "Angiosperma", // Novo campo
+                resistencia: "Média", // Novo campo
+                manutencao: "Média" // Novo campo
             ),
             Planta(
                 nome: "Lírio-da-paz",
@@ -74,7 +76,9 @@ class HomeViewModel: ObservableObject {
                 familia: "Araceae", // Novo campo
                 ordem: "Alismatales", // Novo campo
                 classe: "Liliopsida", // Novo campo
-                filo: "Angiosperma" // Novo campo
+                filo: "Angiosperma", // Novo campo
+                resistencia: "Baixa", // Novo campo
+                manutencao: "Alta" // Novo campo
             ),
             Planta(
                 nome: "Samambaia Ha",
@@ -91,7 +95,9 @@ class HomeViewModel: ObservableObject {
                 familia: "Lomariopsidaceae", // Novo campo
                 ordem: "Polypodiales", // Novo campo
                 classe: "Polypodiopsida", // Novo campo
-                filo: "Tracheophyta" // Novo campo
+                filo: "Tracheophyta", // Novo campo
+                resistencia: "Alta", // Novo campo
+                manutencao: "Baixa" // Novo campo
             )
         ]
     }
