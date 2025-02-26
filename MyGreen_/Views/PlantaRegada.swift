@@ -8,11 +8,48 @@
 import SwiftUI
 
 
-import SwiftUI
-
 struct PlantaRegadaView: View {
     @Environment(\.presentationMode) var presentationMode
     var planta: Planta
+    
+    @State private var plantaRegada: Bool = false
+    
+    @State private var ultimaRega: Date? = nil
+    
+    @State private var timer: Timer?
+    
+    let horasParaRegar: [String: Int] = [
+        "Zamiocultas": 14,
+        "Jibóia-verde": 7,
+        "Lírio-da-paz": 10,
+        "Samambaia Ha": 5,
+        "Espada-de-São-Jorge": 30,
+        "Costela-de-Adão": 7,
+        "Suculenta Zebra": 14,
+        "Antúrio": 7,
+        "Aloe Vera": 14,
+        "Lavanda": 10,
+        "Bromélia": 7,
+        "Cactos": 30,
+    ]
+    
+    var horasNecessarias: Int {
+        return horasParaRegar[planta.nome] ?? 24
+    }
+    
+    func regaEstaAtrasada() -> Bool {
+        guard let ultimaRega = ultimaRega else {
+            return true
+        }
+        let horasDesdeUltimaRega = Calendar.current.dateComponents([.hour], from: ultimaRega, to: Date()).hour ?? 0
+        return horasDesdeUltimaRega >= horasNecessarias
+    }
+    
+    func iniciarTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 3600, repeats: true) { _ in
+            plantaRegada = !regaEstaAtrasada()
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -41,14 +78,14 @@ struct PlantaRegadaView: View {
                 
                 Spacer()
                 
-                VStack(alignment: .leading, spacing: 16) {
-                    HStack {
-                        Image(systemName: "face.smiling")
+                HStack {
+                    VStack(spacing: 8) {
+                        Image(systemName: plantaRegada ? "face.smiling" : "face.dashed")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 30, height: 30)
                             .foregroundColor(.white)
-                        Text("OK")
+                        Text(plantaRegada ? "OK" : "Ruim")
                             .font(.title)
                             .fontWeight(.bold)
                             .foregroundColor(.white)
@@ -57,42 +94,65 @@ struct PlantaRegadaView: View {
                     .background(Color("FontGreenDark").opacity(0.8))
                     .cornerRadius(12)
                     
-                    HStack {
-                        Image(systemName: "drop.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 24, height: 24)
-                            .foregroundColor(.white)
-                        Text("Próxima rega: 14 horas")
-                            .font(.headline)
-                            .foregroundColor(.white)
+                    Spacer()
+                }
+                .padding(.leading, 200)
+                
+                HStack {
+                    VStack(spacing: 8) {
+                        if plantaRegada {
+                            Image(systemName: "drop.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(.white)
+                            Text("\(horasNecessarias) horas")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                        } else {
+                            Image(systemName: "drop")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(.white)
+                                
+                            Text("Atrasada")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                        }
                     }
                     .padding()
                     .background(Color("FontGreenDark").opacity(0.8))
                     .cornerRadius(12)
+                    
+                    Spacer()
                 }
                 .padding(.leading, 200)
-                .frame(maxWidth: .infinity, alignment: .leading)
                 
                 Spacer()
                 
                 Button(action: {
-                    presentationMode.wrappedValue.dismiss()
+                    ultimaRega = Date()
+                    plantaRegada = true
+                    iniciarTimer()
                 }) {
-                    Text("Planta Regada")
+                    Text(plantaRegada ? "Planta regada" : "Regar planta")
                         .font(.headline)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, minHeight: 50)
-                        .background(Color("FontGreenDark"))
+                        .foregroundColor(plantaRegada ? .white : Color("FontGreenDark"))
+                        .frame(width: 200, height: 50)
+                        .background(plantaRegada ? Color("FontGreenDark") : Color.white)
                         .cornerRadius(12)
-                        .padding()
                 }
-                .padding(.horizontal)
+                .padding(.bottom, 20)
             }
         }
-        #if os(iOS)
+        .onAppear {
+            plantaRegada = !regaEstaAtrasada()
+        }
+        .onDisappear {
+            timer?.invalidate()
+        }
         .navigationTitle(planta.nome)
-        #endif
     }
 }
 
@@ -115,8 +175,8 @@ struct PlantaRegadaView_Previews: PreviewProvider {
                 ordem: "Alismatales",
                 classe: "Liliopsida",
                 filo: "Angiosperma",
-                resistencia: "Alta", // Novo campo
-                manutencao: "Baixa" // Novo campo
+                resistencia: "ALTA",
+                manutencao: "BAIXA"
             )
         )
     }

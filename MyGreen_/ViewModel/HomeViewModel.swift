@@ -34,13 +34,13 @@ class HomeViewModel: ObservableObject {
                 tipoPlanta: "Ornamental perene e suculenta",
                 vidaUtil: "Cinco a dez anos ou mais",
                 tempoPlantio: "Primavera ou início do verão",
-                genero: "Zamioculcas", // Novo campo
-                familia: "Araceae", // Novo campo
-                ordem: "Alismatales", // Novo campo
-                classe: "Liliopsida", // Novo campo
-                filo: "Angiosperma", // Novo campo
-                resistencia: "Alta", // Novo campo
-                manutencao: "Baixa" // Novo campo
+                genero: "Zamioculcas",
+                familia: "Araceae",
+                ordem: "Alismatales",
+                classe: "Liliopsida",
+                filo: "Angiosperma",
+                resistencia: "ALTA",
+                manutencao: "BAIXA"
             ),
             Planta(
                 nome: "Jibóia-verde",
@@ -53,13 +53,13 @@ class HomeViewModel: ObservableObject {
                 tipoPlanta: "Trepadeira ornamental perene.",
                 vidaUtil: "Pode viver por muitos anos, com a manutenção adequada.",
                 tempoPlantio: "Durante a primavera ou início do verão, preferindo climas quentes e úmidos.",
-                genero: "Epipremnum", // Novo campo
-                familia: "Araceae", // Novo campo
-                ordem: "Alismatales", // Novo campo
-                classe: "Liliopsida", // Novo campo
-                filo: "Angiosperma", // Novo campo
-                resistencia: "Média", // Novo campo
-                manutencao: "Média" // Novo campo
+                genero: "Epipremnum",
+                familia: "Araceae",
+                ordem: "Alismatales",
+                classe: "Liliopsida",
+                filo: "Angiosperma",
+                resistencia: "MÉDIA",
+                manutencao: "MÉDIA"
             ),
             Planta(
                 nome: "Lírio-da-paz",
@@ -72,13 +72,13 @@ class HomeViewModel: ObservableObject {
                 tipoPlanta: "Ornamental perene",
                 vidaUtil: "Cinco a dez anos ou mais",
                 tempoPlantio: "Durante a primavera ou o verão",
-                genero: "Spathiphyllum", // Novo campo
-                familia: "Araceae", // Novo campo
-                ordem: "Alismatales", // Novo campo
-                classe: "Liliopsida", // Novo campo
-                filo: "Angiosperma", // Novo campo
-                resistencia: "Baixa", // Novo campo
-                manutencao: "Alta" // Novo campo
+                genero: "Spathiphyllum",
+                familia: "Araceae",
+                ordem: "Alismatales",
+                classe: "Liliopsida",
+                filo: "Angiosperma",
+                resistencia: "BAIXA",
+                manutencao: "ALTA"
             ),
             Planta(
                 nome: "Samambaia Ha",
@@ -91,27 +91,177 @@ class HomeViewModel: ObservableObject {
                 tipoPlanta: "Planta ornamental perene",
                 vidaUtil: "Vários anos com a manutenção adequada",
                 tempoPlantio: "Durante a primavera ou início do verão",
-                genero: "Nephrolepis", // Novo campo
-                familia: "Lomariopsidaceae", // Novo campo
-                ordem: "Polypodiales", // Novo campo
-                classe: "Polypodiopsida", // Novo campo
-                filo: "Tracheophyta", // Novo campo
-                resistencia: "Alta", // Novo campo
-                manutencao: "Baixa" // Novo campo
+                genero: "Nephrolepis",
+                familia: "Lomariopsidaceae",
+                ordem: "Polypodiales",
+                classe: "Polypodiopsida",
+                filo: "Tracheophyta",
+                resistencia: "ALTA",
+                manutencao: "BAIXA"
+            ),
+            Planta(
+                nome: "Espada-de-São-Jorge",
+                nomeCienfitico: "Sansevieria trifasciata",
+                descricao: "A Espada-de-São-Jorge (Sansevieria trifasciata) é uma planta suculenta perene, pertencente à família Asparagaceae. É nativa da África Ocidental e é muito apreciada por suas folhas rígidas e verticais que podem purificar o ar.",
+                imagem: "Espada-de-São-Jorge",
+                toxidade: "Levemente tóxica se ingerida",
+                ervaDaninha: "Não",
+                invasividade: "Não é invasiva",
+                tipoPlanta: "Suculenta perene",
+                vidaUtil: "Vários anos com a manutenção adequada",
+                tempoPlantio: "Durante a primavera ou verão",
+                genero: "Sansevieria",
+                familia: "Asparagaceae",
+                ordem: "Asparagales",
+                classe: "Liliopsida",
+                filo: "Angiosperma",
+                resistencia: "ALTA",
+                manutencao: "BAIXA"
+            ),
+            Planta(
+                nome: "Costela-de-Adão",
+                nomeCienfitico: "Monstera deliciosa",
+                descricao: "A Costela-de-Adão (Monstera deliciosa) é uma planta trepadeira tropical da família Araceae. Suas folhas grandes, perfuradas e brilhantes são características distintivas. É nativa das florestas tropicais da América Central.",
+                imagem: "Costela-de-Adão",
+                toxidade: "Levemente tóxica se ingerida",
+                ervaDaninha: "Não",
+                invasividade: "Não é invasiva",
+                tipoPlanta: "Trepadeira tropical",
+                vidaUtil: "Vários anos com a manutenção adequada",
+                tempoPlantio: "Durante a primavera ou verão",
+                genero: "Monstera",
+                familia: "Araceae",
+                ordem: "Alismatales",
+                classe: "Liliopsida",
+                filo: "Angiosperma",
+                resistencia: "MÉDIA",
+                manutencao: "MÉDIA"
+            ),
+            Planta(
+                nome: "Suculenta Zebra",
+                nomeCienfitico: "Haworthiopsis attenuata",
+                descricao: "A Suculenta Zebra (Haworthiopsis attenuata) é uma planta suculenta pertencente à família Asphodelaceae. Originária da África do Sul, é conhecida por suas folhas verdes com listras brancas e pontas afiadas.",
+                imagem: "Suculenta Zebra",
+                toxidade: "Não tóxica",
+                ervaDaninha: "Não",
+                invasividade: "Não é invasiva",
+                tipoPlanta: "Suculenta",
+                vidaUtil: "Vários anos com a manutenção adequada",
+                tempoPlantio: "Durante a primavera ou verão",
+                genero: "Haworthiopsis",
+                familia: "Asphodelaceae",
+                ordem: "Asparagales",
+                classe: "Liliopsida",
+                filo: "Angiosperma",
+                resistencia: "ALTA",
+                manutencao: "BAIXA"
+            ),
+            Planta(
+                nome: "Antúrio",
+                nomeCienfitico: "Anthurium andraeanum",
+                descricao: "O Antúrio (Anthurium andraeanum) é uma planta da família Araceae, conhecida por suas flores em forma de coração e folhas brilhantes. Originário da América Central e do Sul, é muito valorizado como planta ornamental.",
+                imagem: "Antúrio",
+                toxidade: "Tóxica se ingerida, causando irritação na boca e garganta",
+                ervaDaninha: "Não",
+                invasividade: "Não é invasiva",
+                tipoPlanta: "Ornamental perene",
+                vidaUtil: "Vários anos com a manutenção adequada",
+                tempoPlantio: "Durante a primavera ou verão",
+                genero: "Anthurium",
+                familia: "Araceae",
+                ordem: "Alismatales",
+                classe: "Liliopsida",
+                filo: "Angiosperma",
+                resistencia: "MÉDIA",
+                manutencao: "MÉDIA"
+            ),
+            Planta(
+                nome: "Aloe Vera",
+                nomeCienfitico: "Aloe barbadensis miller",
+                descricao: "A Aloe Vera é uma planta suculenta pertencente à família Asphodelaceae. Originária do Norte da África, é conhecida por suas propriedades medicinais e uso em produtos de cuidados pessoais.",
+                imagem: "Aloe Vera",
+                toxidade: "Levemente tóxica se ingerida por animais de estimação",
+                ervaDaninha: "Não",
+                invasividade: "Não é invasiva",
+                tipoPlanta: "Suculenta",
+                vidaUtil: "Vários anos com a manutenção adequada",
+                tempoPlantio: "Durante a primavera",
+                genero: "Aloe",
+                familia: "Asphodelaceae",
+                ordem: "Asparagales",
+                classe: "Liliopsida",
+                filo: "Angiosperma",
+                resistencia: "ALTA",
+                manutencao: "BAIXA"
+            ),
+            Planta(
+                nome: "Lavanda",
+                nomeCienfitico: "Lavandula angustifolia",
+                descricao: "A Lavanda (Lavandula angustifolia) é uma planta da família Lamiaceae, conhecida por suas flores roxas perfumadas e propriedades relaxantes. Originária do Mediterrâneo, é muito usada em jardins e em produtos de aromaterapia.",
+                imagem: "Lavanda",
+                toxidade: "Não tóxica",
+                ervaDaninha: "Não",
+                invasividade: "Não é invasiva",
+                tipoPlanta: "Ornamental perene",
+                vidaUtil: "Vários anos com a manutenção adequada",
+                tempoPlantio: "Durante a primavera ou verão",
+                genero: "Lavandula",
+                familia: "Lamiaceae",
+                ordem: "Lamiales",
+                classe: "Magnoliopsida",
+                filo: "Angiosperma",
+                resistencia: "MÉDIA",
+                manutencao: "MÉDIA"
+            ),
+            Planta(
+                nome: "Bromélia",
+                nomeCienfitico: "Bromelia spp.",
+                descricao: "A Bromélia (Bromelia spp.) é uma planta tropical da família Bromeliaceae. Originária das Américas, é valorizada por suas flores coloridas e folhagem exótica. É uma ótima opção para jardins tropicais.",
+                imagem: "Bromélia",
+                toxidade: "Não tóxica",
+                ervaDaninha: "Não",
+                invasividade: "Não é invasiva",
+                tipoPlanta: "Ornamental perene",
+                vidaUtil: "Vários anos com a manutenção adequada",
+                tempoPlantio: "Durante a primavera ou verão",
+                genero: "Bromelia",
+                familia: "Bromeliaceae",
+                ordem: "Poales",
+                classe: "Liliopsida",
+                filo: "Angiosperma",
+                resistencia: "MÉDIA",
+                manutencao: "MÉDIA"
+            ),
+            Planta(
+                nome: "Cactos",
+                nomeCienfitico: "Cactaceae",
+                descricao: "Os Cactos (Cactaceae) são plantas suculentas da família Cactaceae, nativas das Américas. São conhecidos por sua adaptação a ambientes áridos e suas formas variadas e muitas vezes espinhosas.",
+                imagem: "Cactos",
+                toxidade: "Não tóxica",
+                ervaDaninha: "Não",
+                invasividade: "Não é invasiva",
+                tipoPlanta: "Suculenta perene",
+                vidaUtil: "Vários anos com a manutenção adequada",
+                tempoPlantio: "Durante a primavera ou verão",
+                genero: "Cactaceae",
+                familia: "Cactaceae",
+                ordem: "Caryophyllales",
+                classe: "Magnoliopsida",
+                filo: "Angiosperma",
+                resistencia: "ALTA",
+                manutencao: "BAIXA"
             )
         ]
     }
     
-    // Método para adicionar ou remover uma planta dos favoritos
     func toggleFavorito(planta: Planta) {
         if let index = plantasFavoritas.firstIndex(where: { $0.id == planta.id }) {
-            plantasFavoritas.remove(at: index) // Remove se já estiver nos favoritos
+            plantasFavoritas.remove(at: index)
         } else {
-            plantasFavoritas.append(planta) // Adiciona se não estiver nos favoritos
+            plantasFavoritas.append(planta)
         }
     }
     
-    // Método para verificar se uma planta está nos favoritos
     func isFavorito(planta: Planta) -> Bool {
         return plantasFavoritas.contains { $0.id == planta.id }
     }

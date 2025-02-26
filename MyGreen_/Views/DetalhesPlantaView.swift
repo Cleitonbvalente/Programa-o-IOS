@@ -32,9 +32,9 @@ struct DetalhesPlantaView: View {
     }
     
     private func calcularNivelDificuldade(resistencia: String, manutencao: String) -> Int {
-        if resistencia == "Alta" && manutencao == "Baixa" {
+        if resistencia == "ALTA" && manutencao == "BAIXA" {
             return 1
-        } else if resistencia == "Média" && manutencao == "Média" {
+        } else if resistencia == "MÉDIA" && manutencao == "MÉDIA" {
             return 2
         } else {
             return 3
@@ -117,7 +117,7 @@ struct DetalhesPlantaView: View {
                         DificuldadeIcone(nivel: calcularNivelDificuldade(resistencia: planta.resistencia, manutencao: planta.manutencao))
                             .padding(.vertical, 8)
                         
-                        HStack(spacing: 10) {
+                        HStack(spacing: 40) {
                             VStack(alignment: .center, spacing: 4) {
                                 Text("Resistência")
                                     .font(.headline)
@@ -277,8 +277,8 @@ struct DetalhesPlantaView_Previews: PreviewProvider {
                 ordem: "Alismatales",
                 classe: "Liliopsida",
                 filo: "Angiosperma",
-                resistencia: "Alta",
-                manutencao: "Baixa"
+                resistencia: "ALTA",
+                manutencao: "BAIXA"
             ),
             plantasNoJardim: .constant([])
         )

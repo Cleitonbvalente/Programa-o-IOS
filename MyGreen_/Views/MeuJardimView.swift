@@ -18,11 +18,16 @@ struct MeuJardimView: View {
                 .fontWeight(.bold)
                 .padding(.top)
             
-            TextField("Pesquisar minhas plantas...", text: $pesquisaTexto)
-                .padding()
-                .background(Color(hex: "#F5F5DC"))
-                .cornerRadius(8)
-                .padding(.horizontal)
+
+            HStack {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(.gray)
+                TextField("Pesquisar minhas plantas...", text: $pesquisaTexto)
+            }
+            .padding()
+            .background(Color(hex: "#F5F5DC"))
+            .cornerRadius(8)
+            .padding(.horizontal)
             
             if plantasNoJardim.isEmpty {
                 Spacer()
