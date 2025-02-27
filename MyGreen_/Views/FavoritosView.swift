@@ -40,6 +40,7 @@ struct FavoritosView: View {
             }
         }
         .navigationTitle("Favoritos")
+        .foregroundColor(Color("FontGreenDark"))
     }
 }
 

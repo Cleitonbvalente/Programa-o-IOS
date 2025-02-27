@@ -10,14 +10,35 @@ import SwiftUI
 struct MeuJardimView: View {
     @Binding var plantasNoJardim: [Planta]
     @State private var pesquisaTexto: String = ""
-    
+    @State private var mostrarAdicionarPlantas = false
+
+    var plantasDisponiveis: [Planta]
+
     var body: some View {
         VStack(spacing: 16) {
-            Text("Meu Jardim")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .padding(.top)
-            
+            HStack {
+                Text("Meu Jardim")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .padding(.top)
+                
+                Spacer()
+                
+                Button(action: {
+                    mostrarAdicionarPlantas = true
+                }) {
+                    Image(systemName: "plus")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 24, height: 24)
+                        .foregroundColor(Color("FontGreenDark"))
+                        .padding(8)
+                        .background(Color.white)
+                        .cornerRadius(8)
+                        .shadow(radius: 2)
+                }
+            }
+            .padding(.horizontal)
 
             HStack {
                 Image(systemName: "magnifyingglass")
@@ -28,7 +49,7 @@ struct MeuJardimView: View {
             .background(Color(hex: "#F5F5DC"))
             .cornerRadius(8)
             .padding(.horizontal)
-            
+
             if plantasNoJardim.isEmpty {
                 Spacer()
                 Text("Nenhuma planta no jardim.")
@@ -54,5 +75,9 @@ struct MeuJardimView: View {
             }
         }
         .navigationTitle("Meu Jardim")
+        .foregroundColor(Color("FontGreenDark"))
+        .sheet(isPresented: $mostrarAdicionarPlantas) {
+            AdicionarPlantasView(plantasNoJardim: $plantasNoJardim, plantasDisponiveis: plantasDisponiveis)
+        }
     }
 }

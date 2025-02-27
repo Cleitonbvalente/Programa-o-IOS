@@ -8,14 +8,21 @@
 
 import SwiftUI
 
-import SwiftUI
 
 struct CartaoDePlantaView: View {
     @Binding var plantasFavoritas: [Planta]
     @Binding var plantasNoJardim: [Planta]
     @State private var plantaRegada: Bool = false
     var planta: Planta
-    var isMeuJardim: Bool // Novo parâmetro
+    var isMeuJardim: Bool
+    
+    func truncarTexto(_ texto: String, limite: Int) -> String {
+        if texto.count > limite {
+            let indice = texto.index(texto.startIndex, offsetBy: limite)
+            return String(texto[..<indice]) + "..."
+        }
+        return texto
+    }
 
     var body: some View {
         NavigationLink(
@@ -27,61 +34,43 @@ struct CartaoDePlantaView: View {
                     Image(planta.imagem)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(height: 180)
+                        .frame(height: 220)
                         .cornerRadius(8)
                         .clipped()
                     
-                    // Overlay de informações
                     Rectangle()
-                        .fill(Color.green.opacity(0.6))
-                        .frame(height: 50)
+                        .fill(isMeuJardim ? Color(hex: "#00FF00").opacity(0.8) : Color("FontGreenDark").opacity(0.8))
+                        .frame(height: 60)
                         .cornerRadius(8)
                         .clipped()
+                    
+                    HStack(alignment: .center) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(truncarTexto(planta.nome, limite: 12))
+                                .font(.system(size: 20))
+                                .foregroundColor(isMeuJardim ? .black : .white)
+                            
+                            Text(truncarTexto(planta.nomeCienfitico, limite: 12))
+                                .font(.system(size: 14)) // Fonte menor
+                                .foregroundColor(isMeuJardim ? .black : .white)
+                        }
+                        
+                        if isMeuJardim {
+                            Image(systemName: "drop.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 28, height: 28)
+                                .foregroundColor(Color("FontGreenDark"))
+                                .padding(.leading, 8)
+                        }
+                    }
+                    .padding(.horizontal, 32)
+                    .padding(.bottom, 8)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     
                     VStack {
-                        Spacer()
                         HStack {
-                            Text(planta.nome)
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .lineLimit(1)
-                                .truncationMode(.tail)
-                            
-                            if plantasNoJardim.contains(where: { $0.id == planta.id }) {
-                                Button(action: {
-                                    withAnimation {
-                                        plantaRegada.toggle()
-                                    }
-                                }) {
-                                    Image(systemName: "drop.fill")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 16, height: 16)
-                                        .foregroundColor(plantaRegada ? .blue : .clear)
-                                        .background(
-                                            Circle()
-                                                .stroke(Color.blue, lineWidth: 1)
-                                                .background(Circle().fill(plantaRegada ? Color.blue : Color.clear))
-                                        )
-                                        .padding(.leading, 4)
-                                }
-                            }
-                        }
-                        .padding(.bottom, 2)
-
-                        Text(planta.nomeCienfitico)
-                            .font(.subheadline)
-                            .foregroundColor(.white)
-                            .lineLimit(1)
-                            .truncationMode(.tail)
-                            .padding(.bottom, 5)
-                    }
-                    .padding(.horizontal)
-                    
-                    // Botão de favorito
-                    HStack {
-                        Spacer()
-                        VStack {
+                            Spacer()
                             Button(action: {
                                 withAnimation {
                                     if plantasFavoritas.contains(where: { $0.id == planta.id }) {
@@ -94,15 +83,18 @@ struct CartaoDePlantaView: View {
                                 Image(systemName: plantasFavoritas.contains(where: { $0.id == planta.id }) ? "heart.fill" : "heart")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 20, height: 20)
+                                    .frame(width:24, height: 24)
                                     .foregroundColor(plantasFavoritas.contains(where: { $0.id == planta.id }) ? Color("FontGreenDark") : Color("FontGreenDark"))
-                                    .padding(6)
+                                    .padding(8)
                             }
-                            Spacer()
                         }
+                        .padding(.trailing, 20)
+                        Spacer()
                     }
                 }
+                .frame(height: 220)
             }
+            .frame(maxWidth: 180)
             .cornerRadius(8)
             .padding(.horizontal, 8)
             .padding(.bottom, 16)

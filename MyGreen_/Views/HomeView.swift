@@ -67,7 +67,7 @@ struct HomeView: View {
                     .edgesIgnoringSafeArea(.all)
                 
                 TabView(selection: $abaSelecionada) {
-                    MeuJardimView(plantasNoJardim: $plantasNoJardim)
+                    MeuJardimView(plantasNoJardim: $plantasNoJardim, plantasDisponiveis: viewModel.plantas)
                         .tabItem {
                             Image(systemName: "leaf")
                             Text("Meu Jardim")
@@ -82,6 +82,7 @@ struct HomeView: View {
                                 .frame(width: 100)
                         }
                         
+                        // Barra de pesquisa
                         HStack {
                             Image(systemName: "magnifyingglass")
                                 .foregroundColor(.gray)
