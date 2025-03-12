@@ -62,12 +62,14 @@ struct MeuJardimView: View {
                         ForEach(plantasNoJardim.filter {
                             pesquisaTexto.isEmpty || $0.nome.localizedCaseInsensitiveContains(pesquisaTexto)
                         }) { planta in
-                            CartaoDePlantaView(
-                                plantasFavoritas: .constant([]),
-                                plantasNoJardim: $plantasNoJardim,
-                                planta: planta,
-                                isMeuJardim: true
-                            )
+                            NavigationLink(destination: PlantaRegadaView(planta: planta, plantasNoJardim: $plantasNoJardim)) {
+                                CartaoDePlantaView(
+                                    plantasFavoritas: .constant([]),
+                                    plantasNoJardim: $plantasNoJardim,
+                                    planta: planta,
+                                    isMeuJardim: true
+                                )
+                            }
                         }
                     }
                     .padding()
@@ -79,5 +81,11 @@ struct MeuJardimView: View {
         .sheet(isPresented: $mostrarAdicionarPlantas) {
             AdicionarPlantasView(plantasNoJardim: $plantasNoJardim, plantasDisponiveis: plantasDisponiveis)
         }
+        .onAppear {
+            plantasNoJardim = carregarPlantasNoJardim()
+        }
+        .onChange(of: plantasNoJardim) { valorAntigo, novoValor in
+                            salvarPlantasNoJardim(novoValor)
+                        }
     }
 }

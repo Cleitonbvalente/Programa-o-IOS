@@ -14,6 +14,8 @@
 		3402DB342D4AEBF900CD6292 /* CartaoDePlantaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3402DB332D4AEBF900CD6292 /* CartaoDePlantaView.swift */; };
 		3402DB362D4AECEC00CD6292 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3402DB352D4AECEC00CD6292 /* ColorExtensions.swift */; };
 		4044ED942D66C78200E6B91F /* PlantaRegada.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4044ED932D66C78200E6B91F /* PlantaRegada.swift */; };
+		40948DC32D7AA2EE0066C85F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40948DC22D7AA2EE0066C85F /* Utils.swift */; };
+		40948DC52D7D6BA80066C85F /* PerfilView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40948DC42D7D6BA80066C85F /* PerfilView.swift */; };
 		40D0866F2D1E72A40013E8CA /* MyGreen_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D0866E2D1E72A40013E8CA /* MyGreen_App.swift */; };
 		40D086712D1E72A40013E8CA /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D086702D1E72A40013E8CA /* HomeView.swift */; };
 		40D086732D1E72A50013E8CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40D086722D1E72A50013E8CA /* Assets.xcassets */; };
@@ -24,6 +26,8 @@
 		40D086A02D29049A0013E8CA /* MeuJardimView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D0869F2D29049A0013E8CA /* MeuJardimView.swift */; };
 		40D086A22D2E1C440013E8CA /* DetalhesPlantaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D086A12D2E1C440013E8CA /* DetalhesPlantaView.swift */; };
 		40D086A42D3231140013E8CA /* FavoritosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D086A32D3231140013E8CA /* FavoritosView.swift */; };
+		40F0D8422D6EC3080046840C /* FiltrosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F0D8412D6EC3080046840C /* FiltrosView.swift */; };
+		40F0D8442D7031E50046840C /* AdicionarPlantasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F0D8432D7031E50046840C /* AdicionarPlantasView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +56,8 @@
 		3402DB332D4AEBF900CD6292 /* CartaoDePlantaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartaoDePlantaView.swift; sourceTree = "<group>"; };
 		3402DB352D4AECEC00CD6292 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		4044ED932D66C78200E6B91F /* PlantaRegada.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantaRegada.swift; sourceTree = "<group>"; };
+		40948DC22D7AA2EE0066C85F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		40948DC42D7D6BA80066C85F /* PerfilView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilView.swift; sourceTree = "<group>"; };
 		40D0866B2D1E72A40013E8CA /* MyGreen_.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyGreen_.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40D0866E2D1E72A40013E8CA /* MyGreen_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGreen_App.swift; sourceTree = "<group>"; };
 		40D086702D1E72A40013E8CA /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -66,6 +72,8 @@
 		40D0869F2D29049A0013E8CA /* MeuJardimView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeuJardimView.swift; sourceTree = "<group>"; };
 		40D086A12D2E1C440013E8CA /* DetalhesPlantaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalhesPlantaView.swift; sourceTree = "<group>"; };
 		40D086A32D3231140013E8CA /* FavoritosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritosView.swift; sourceTree = "<group>"; };
+		40F0D8412D6EC3080046840C /* FiltrosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltrosView.swift; sourceTree = "<group>"; };
+		40F0D8432D7031E50046840C /* AdicionarPlantasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdicionarPlantasView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +104,6 @@
 		3402DAF42D4AE60200CD6292 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				40D086752D1E72A50013E8CA /* Preview Content */,
 				3402DAFB2D4AE61D00CD6292 /* DotGothic16 */,
 				40D086722D1E72A50013E8CA /* Assets.xcassets */,
 			);
@@ -125,11 +132,15 @@
 			children = (
 				3402DB322D4AEBE000CD6292 /* SubView */,
 				40D086702D1E72A40013E8CA /* HomeView.swift */,
+				40F0D8432D7031E50046840C /* AdicionarPlantasView.swift */,
 				3402DB352D4AECEC00CD6292 /* ColorExtensions.swift */,
+				40F0D8412D6EC3080046840C /* FiltrosView.swift */,
 				40D086A12D2E1C440013E8CA /* DetalhesPlantaView.swift */,
 				40D086A32D3231140013E8CA /* FavoritosView.swift */,
 				40D0869F2D29049A0013E8CA /* MeuJardimView.swift */,
 				4044ED932D66C78200E6B91F /* PlantaRegada.swift */,
+				40948DC22D7AA2EE0066C85F /* Utils.swift */,
+				40948DC42D7D6BA80066C85F /* PerfilView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -173,6 +184,7 @@
 		40D0866D2D1E72A40013E8CA /* MyGreen_ */ = {
 			isa = PBXGroup;
 			children = (
+				40D086752D1E72A50013E8CA /* Preview Content */,
 				40D0866E2D1E72A40013E8CA /* MyGreen_App.swift */,
 				3402DB312D4AEB8E00CD6292 /* Models */,
 				3402DB302D4AEB7B00CD6292 /* Views */,
@@ -341,11 +353,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40F0D8422D6EC3080046840C /* FiltrosView.swift in Sources */,
+				40F0D8442D7031E50046840C /* AdicionarPlantasView.swift in Sources */,
 				40D086A22D2E1C440013E8CA /* DetalhesPlantaView.swift in Sources */,
 				3402DB342D4AEBF900CD6292 /* CartaoDePlantaView.swift in Sources */,
 				3402DB2D2D4AE93900CD6292 /* HomeViewModel.swift in Sources */,
+				40948DC32D7AA2EE0066C85F /* Utils.swift in Sources */,
 				4044ED942D66C78200E6B91F /* PlantaRegada.swift in Sources */,
 				40D086712D1E72A40013E8CA /* HomeView.swift in Sources */,
+				40948DC52D7D6BA80066C85F /* PerfilView.swift in Sources */,
 				3402DB2F2D4AEB7500CD6292 /* BotaoDeNavegacaoView.swift in Sources */,
 				40D0866F2D1E72A40013E8CA /* MyGreen_App.swift in Sources */,
 				40D086A02D29049A0013E8CA /* MeuJardimView.swift in Sources */,
@@ -509,7 +525,7 @@
 				CODE_SIGN_ENTITLEMENTS = MyGreen_/MyGreen_.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"MyGreen_/Assets/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MyGreen_/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -547,7 +563,7 @@
 				CODE_SIGN_ENTITLEMENTS = MyGreen_/MyGreen_.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"MyGreen_/Assets/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MyGreen_/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

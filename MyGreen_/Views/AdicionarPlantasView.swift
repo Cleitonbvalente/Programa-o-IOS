@@ -49,6 +49,7 @@ struct AdicionarPlantasView: View {
                                 plantasNoJardim.append(planta)
                             }
                         }
+                        salvarPlantasNoJardim(plantasNoJardim) // Salva as alterações
                         presentationMode.wrappedValue.dismiss()
                     }
                 }

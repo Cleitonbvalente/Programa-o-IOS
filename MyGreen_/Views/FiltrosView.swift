@@ -20,62 +20,17 @@ struct FiltrosView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Tipo de Planta")) {
-                    Picker("Tipo", selection: $tipoSelecionado) {
-                        Text("Todas").tag(nil as String?)
-                        Text("Ornamental").tag("Ornamental" as String?)
-                        Text("Suculenta").tag("Suculenta" as String?)
-                        Text("Trepadeira").tag("Trepadeira" as String?)
-                    }
-                    .pickerStyle(MenuPickerStyle())
-                }
+                FiltroPicker(titulo: "Tipo de Planta", opcoes: ["Ornamental", "Suculenta", "Trepadeira"], selecao: $tipoSelecionado)
                 
-                Section(header: Text("Toxidade")) {
-                    Picker("Toxidade", selection: $toxidadeSelecionada) {
-                        Text("Todas").tag(nil as String?)
-                        Text("Tóxica").tag("Tóxica" as String?)
-                        Text("Não Tóxica").tag("Não Tóxica" as String?)
-                    }
-                    .pickerStyle(MenuPickerStyle())
-                }
+                FiltroPicker(titulo: "Toxidade", opcoes: ["Tóxica", "Não Tóxica"], selecao: $toxidadeSelecionada)
                 
-                Section(header: Text("Resistência")) {
-                    Picker("Resistência", selection: $resistenciaSelecionada) {
-                        Text("Todas").tag(nil as String?)
-                        Text("Alta").tag("Alta" as String?)
-                        Text("Média").tag("Média" as String?)
-                        Text("Baixa").tag("Baixa" as String?)
-                    }
-                    .pickerStyle(MenuPickerStyle())
-                }
+                FiltroPicker(titulo: "Resistência", opcoes: ["Alta", "Média", "Baixa"], selecao: $resistenciaSelecionada)
                 
-                Section(header: Text("Manutenção")) {
-                    Picker("Manutenção", selection: $manutencaoSelecionada) {
-                        Text("Todas").tag(nil as String?)
-                        Text("Alta").tag("Alta" as String?)
-                        Text("Média").tag("Média" as String?)
-                        Text("Baixa").tag("Baixa" as String?)
-                    }
-                    .pickerStyle(MenuPickerStyle())
-                }
+                FiltroPicker(titulo: "Manutenção", opcoes: ["Alta", "Média", "Baixa"], selecao: $manutencaoSelecionada)
                 
-                Section(header: Text("Invasividade")) {
-                    Picker("Invasividade", selection: $invasividadeSelecionada) {
-                        Text("Todas").tag(nil as String?)
-                        Text("Invasiva").tag("Invasiva" as String?)
-                        Text("Não Invasiva").tag("Não Invasiva" as String?)
-                    }
-                    .pickerStyle(MenuPickerStyle())
-                }
+                FiltroPicker(titulo: "Invasividade", opcoes: ["Invasiva", "Não Invasiva"], selecao: $invasividadeSelecionada)
                 
-                Section(header: Text("Erva Daninha")) {
-                    Picker("Erva Daninha", selection: $ervaDaninhaSelecionada) {
-                        Text("Todas").tag(nil as String?)
-                        Text("Sim").tag("Sim" as String?)
-                        Text("Não").tag("Não" as String?)
-                    }
-                    .pickerStyle(MenuPickerStyle())
-                }
+                FiltroPicker(titulo: "Erva Daninha", opcoes: ["Sim", "Não"], selecao: $ervaDaninhaSelecionada)
             }
             .navigationTitle("Filtros")
             .toolbar {
@@ -85,6 +40,18 @@ struct FiltrosView: View {
                     }
                 }
             }
+        }
+    }
+    
+    private func FiltroPicker(titulo: String, opcoes: [String], selecao: Binding<String?>) -> some View {
+        Section(header: Text(titulo)) {
+            Picker(titulo, selection: selecao) {
+                Text("Todas").tag(nil as String?)
+                ForEach(opcoes, id: \.self) { opcao in
+                    Text(opcao).tag(opcao as String?)
+                }
+            }
+            .pickerStyle(MenuPickerStyle())
         }
     }
 }

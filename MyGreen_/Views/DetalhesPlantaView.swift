@@ -8,21 +8,6 @@
 import SwiftUI
 
 
-struct DificuldadeIcone: View {
-    let nivel: Int
-    
-    var body: some View {
-        HStack(spacing: 4) {
-            ForEach(1..<4) { index in
-                Image(systemName: index <= nivel ? "leaf.fill" : "leaf")
-                    .foregroundColor(index <= nivel ? Color("FontGreenDark") : Color.gray)
-            }
-        }
-        .font(.system(size: 20))
-        .frame(maxWidth: .infinity, alignment: .center)
-    }
-}
-
 struct DetalhesPlantaView: View {
     let planta: Planta
     @Binding var plantasNoJardim: [Planta]
@@ -154,6 +139,7 @@ struct DetalhesPlantaView: View {
                 } else {
                     plantasNoJardim.append(planta)
                 }
+                salvarPlantasNoJardim(plantasNoJardim)
             }) {
                 Text(plantaEstaNoJardim ? "Remover do Meu Jardim" : "Adicionar ao Meu Jardim")
                     .font(.headline)
@@ -166,7 +152,29 @@ struct DetalhesPlantaView: View {
             .padding(.horizontal)
             .background(Color("CorDeFundo"))
         }
-        .navigationTitle(planta.nome)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(planta.nome)
+                    .font(.title3)
+                    .bold()
+                    .foregroundColor(Color("FontGreenDark"))
+            }
+        }
+    }
+}
+
+struct DificuldadeIcone: View {
+    let nivel: Int
+    
+    var body: some View {
+        HStack(spacing: 4) {
+            ForEach(1..<4) { index in
+                Image(systemName: index <= nivel ? "leaf.fill" : "leaf")
+                    .foregroundColor(index <= nivel ? Color("FontGreenDark") : Color.gray)
+            }
+        }
+        .font(.system(size: 20))
+        .frame(maxWidth: .infinity, alignment: .center)
     }
 }
 
@@ -191,8 +199,8 @@ struct LinhaDeInfo: View {
     }
 }
 
-struct Planta: Identifiable {
-    let id = UUID()
+struct Planta: Identifiable, Codable, Equatable {
+    var id: UUID = UUID()
     let nome: String
     let nomeCienfitico: String
     let descricao: String
@@ -254,8 +262,6 @@ struct Planta: Identifiable {
         self.manutencao = manutencao
     }
 }
-
-
 struct DetalhesPlantaView_Previews: PreviewProvider {
     @State static var plantasNoJardim: [Planta] = []
     

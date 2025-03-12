@@ -11,44 +11,41 @@ import SwiftUI
 struct PlantaRegadaView: View {
     @Environment(\.presentationMode) var presentationMode
     var planta: Planta
+    @Binding var plantasNoJardim: [Planta]
     
     @State private var plantaRegada: Bool = false
     
-    @State private var ultimaRega: Date? = nil
-    
-    @State private var timer: Timer?
-    
-    let horasParaRegar: [String: Int] = [
-        "Zamiocultas": 14,
-        "Jibóia-verde": 7,
-        "Lírio-da-paz": 10,
-        "Samambaia Ha": 5,
-        "Espada-de-São-Jorge": 30,
-        "Costela-de-Adão": 7,
-        "Suculenta Zebra": 14,
-        "Antúrio": 7,
-        "Aloe Vera": 14,
-        "Lavanda": 10,
-        "Bromélia": 7,
-        "Cactos": 30,
-    ]
+    private var ultimaRega: Date? {
+        let formatter = ISO8601DateFormatter()
+        if let ultimaRegaString = UserDefaults.standard.string(forKey: "ultimaRega_\(planta.id.uuidString)") {
+            return formatter.date(from: ultimaRegaString)
+        }
+        return nil
+    }
     
     var horasNecessarias: Int {
+        let horasParaRegar: [String: Int] = [
+            "Zamiocultas": 14,
+            "Jibóia-verde": 7,
+            "Lírio-da-paz": 10,
+            "Samambaia Ha": 5,
+            "Espada-de-São-Jorge": 30,
+            "Costela-de-Adão": 7,
+            "Suculenta Zebra": 14,
+            "Antúrio": 7,
+            "Aloe Vera": 14,
+            "Lavanda": 10,
+            "Bromélia": 7,
+            "Cactos": 30,
+        ]
         return horasParaRegar[planta.nome] ?? 24
     }
     
-    func regaEstaAtrasada() -> Bool {
-        guard let ultimaRega = ultimaRega else {
-            return true
-        }
-        let horasDesdeUltimaRega = Calendar.current.dateComponents([.hour], from: ultimaRega, to: Date()).hour ?? 0
-        return horasDesdeUltimaRega >= horasNecessarias
-    }
-    
-    func iniciarTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 3600, repeats: true) { _ in
-            plantaRegada = !regaEstaAtrasada()
-        }
+    private func atualizarUltimaRega() {
+        let formatter = ISO8601DateFormatter()
+        let novaData = formatter.string(from: Date())
+        UserDefaults.standard.set(novaData, forKey: "ultimaRega_\(planta.id.uuidString)")
+        plantaRegada = true
     }
     
     var body: some View {
@@ -59,22 +56,24 @@ struct PlantaRegadaView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 20) {
-                VStack {
-                    Text(planta.nome)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                    
-                    Text("(\(planta.nomeCienfitico))")
-                        .font(.subheadline)
-                        .foregroundColor(.white)
-                        .italic()
+                NavigationLink(destination: DetalhesPlantaView(planta: planta, plantasNoJardim: $plantasNoJardim)) {
+                    VStack {
+                        Text(planta.nome)
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                        
+                        Text("(\(planta.nomeCienfitico))")
+                            .font(.subheadline)
+                            .foregroundColor(.white)
+                            .italic()
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                    .background(Color("FontGreenDark").opacity(0.8))
+                    .cornerRadius(12)
+                    .padding(.top, 40)
                 }
-                .padding(.horizontal, 20)
-                .padding(.vertical, 10)
-                .background(Color("FontGreenDark").opacity(0.8))
-                .cornerRadius(12)
-                .padding(.top, 40)
                 
                 Spacer()
                 
@@ -115,7 +114,7 @@ struct PlantaRegadaView: View {
                                 .scaledToFit()
                                 .frame(width: 24, height: 24)
                                 .foregroundColor(.white)
-                                
+                            
                             Text("Atrasada")
                                 .font(.headline)
                                 .foregroundColor(.white)
@@ -132,9 +131,7 @@ struct PlantaRegadaView: View {
                 Spacer()
                 
                 Button(action: {
-                    ultimaRega = Date()
-                    plantaRegada = true
-                    iniciarTimer()
+                    atualizarUltimaRega()
                 }) {
                     Text(plantaRegada ? "Planta regada" : "Regar planta")
                         .font(.headline)
@@ -147,12 +144,13 @@ struct PlantaRegadaView: View {
             }
         }
         .onAppear {
-            plantaRegada = !regaEstaAtrasada()
+            if let ultimaRega = ultimaRega {
+                let horasDesdeUltimaRega = Calendar.current.dateComponents([.hour], from: ultimaRega, to: Date()).hour ?? 0
+                plantaRegada = horasDesdeUltimaRega < horasNecessarias
+            } else {
+                plantaRegada = false
+            }
         }
-        .onDisappear {
-            timer?.invalidate()
-        }
-        .navigationTitle(planta.nome)
     }
 }
 
@@ -177,8 +175,8 @@ struct PlantaRegadaView_Previews: PreviewProvider {
                 filo: "Angiosperma",
                 resistencia: "ALTA",
                 manutencao: "BAIXA"
-            )
+            ),
+            plantasNoJardim: .constant([])
         )
     }
 }
-

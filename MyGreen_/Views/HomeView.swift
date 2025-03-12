@@ -10,7 +10,7 @@ import SwiftUI
 
 struct HomeView: View {
     @State private var pesquisaTexto: String = ""
-    @State private var plantasNoJardim: [Planta] = []
+    @State private var plantasNoJardim: [Planta] = carregarPlantasNoJardim()
     @ObservedObject private var viewModel: HomeViewModel = .init()
     
     @State private var abaSelecionada: Int = 1
@@ -22,6 +22,7 @@ struct HomeView: View {
     @State private var manutencaoSelecionada: String? = nil
     @State private var invasividadeSelecionada: String? = nil
     @State private var ervaDaninhaSelecionada: String? = nil
+    
     
     var plantasFiltradas: [Planta] {
         var plantas = viewModel.plantas
@@ -75,14 +76,27 @@ struct HomeView: View {
                         .tag(0)
                     
                     VStack(spacing: 20) {
-                        HStack {
+                        ZStack {
                             Image("MyGreen Logomarca")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 100)
+                            
+                            HStack {
+                                Spacer()
+                                
+                                NavigationLink(destination: PerfilView()) {
+                                    Image(systemName: "person.circle")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 30, height: 30)
+                                        .foregroundColor(Color("FontGreenDark"))
+                                }
+                            }
+                            .padding(.horizontal)
                         }
+                        .frame(maxWidth: .infinity)
                         
-                        // Barra de pesquisa
                         HStack {
                             Image(systemName: "magnifyingglass")
                                 .foregroundColor(.gray)
@@ -154,6 +168,16 @@ struct HomeView: View {
                 )
             }
         }
+        .onAppear {
+            viewModel.plantasFavoritas = carregarPlantasFavoritas()
+            plantasNoJardim = carregarPlantasNoJardim()
+        }
+        .onChange(of: viewModel.plantasFavoritas) { valorAntigo, novoValor in
+            salvarPlantasFavoritas(novoValor)
+        }
+        .onChange(of: plantasNoJardim) { valorAntigo, novoValor in
+            salvarPlantasNoJardim(novoValor)
+        }
     }
 }
 
@@ -162,4 +186,3 @@ struct ConteudoView_Previews: PreviewProvider {
         HomeView()
     }
 }
-     
