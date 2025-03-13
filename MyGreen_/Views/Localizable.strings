@@ -1,0 +1,14 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+      "perfil_titulo" = "Profile";
+      "modo_escuro" = "Dark Mode";
+      "idioma" = "Language";
+      "portugues" = "Portuguese";
+      "espanhol" = "Spanish";
+      "ingles" = "English";
+      "salvar_alteracoes" = "Save changes";
+  },
+  "version" : "1.0"
+}
+

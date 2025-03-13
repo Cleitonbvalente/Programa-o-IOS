@@ -14,6 +14,7 @@
 		3402DB342D4AEBF900CD6292 /* CartaoDePlantaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3402DB332D4AEBF900CD6292 /* CartaoDePlantaView.swift */; };
 		3402DB362D4AECEC00CD6292 /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3402DB352D4AECEC00CD6292 /* ColorExtensions.swift */; };
 		4044ED942D66C78200E6B91F /* PlantaRegada.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4044ED932D66C78200E6B91F /* PlantaRegada.swift */; };
+		40673E272D825A8D007279E9 /* AppSettings.View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40673E262D825A8D007279E9 /* AppSettings.View.swift */; };
 		40948DC32D7AA2EE0066C85F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40948DC22D7AA2EE0066C85F /* Utils.swift */; };
 		40948DC52D7D6BA80066C85F /* PerfilView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40948DC42D7D6BA80066C85F /* PerfilView.swift */; };
 		40D0866F2D1E72A40013E8CA /* MyGreen_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D0866E2D1E72A40013E8CA /* MyGreen_App.swift */; };
@@ -56,6 +57,7 @@
 		3402DB332D4AEBF900CD6292 /* CartaoDePlantaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartaoDePlantaView.swift; sourceTree = "<group>"; };
 		3402DB352D4AECEC00CD6292 /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		4044ED932D66C78200E6B91F /* PlantaRegada.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantaRegada.swift; sourceTree = "<group>"; };
+		40673E262D825A8D007279E9 /* AppSettings.View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.View.swift; sourceTree = "<group>"; };
 		40948DC22D7AA2EE0066C85F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		40948DC42D7D6BA80066C85F /* PerfilView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilView.swift; sourceTree = "<group>"; };
 		40D0866B2D1E72A40013E8CA /* MyGreen_.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyGreen_.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,6 +143,7 @@
 				4044ED932D66C78200E6B91F /* PlantaRegada.swift */,
 				40948DC22D7AA2EE0066C85F /* Utils.swift */,
 				40948DC42D7D6BA80066C85F /* PerfilView.swift */,
+				40673E262D825A8D007279E9 /* AppSettings.View.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				40948DC52D7D6BA80066C85F /* PerfilView.swift in Sources */,
 				3402DB2F2D4AEB7500CD6292 /* BotaoDeNavegacaoView.swift in Sources */,
 				40D0866F2D1E72A40013E8CA /* MyGreen_App.swift in Sources */,
+				40673E272D825A8D007279E9 /* AppSettings.View.swift in Sources */,
 				40D086A02D29049A0013E8CA /* MeuJardimView.swift in Sources */,
 				3402DB362D4AECEC00CD6292 /* ColorExtensions.swift in Sources */,
 				40D086A42D3231140013E8CA /* FavoritosView.swift in Sources */,

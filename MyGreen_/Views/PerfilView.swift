@@ -9,9 +9,9 @@ import SwiftUI
 
 
 struct PerfilView: View {
+    @EnvironmentObject var appSettings: AppSettings
     @State private var nome: String = ""
     @State private var sobrenome: String = ""
-    @State private var modoEscuroAtivo: Bool = false
     @State private var mostrarAlertaSucesso: Bool = false
     @Environment(\.presentationMode) var presentationMode
 
@@ -21,7 +21,7 @@ struct PerfilView: View {
                 Text("Perfil")
                     .font(.largeTitle)
                     .fontWeight(.bold)
-                    .foregroundColor(Color("FontGreenDark"))
+                    .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "32CD32") : Color("FontGreenDark"))
                 
                 Spacer()
             }
@@ -32,18 +32,18 @@ struct PerfilView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 100, height: 100)
-                .foregroundColor(Color("FontGreenDark"))
+                .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "32CD32") : Color("FontGreenDark"))
                 .padding(.top, 10)
             
             TextField("Nome", text: $nome)
                 .padding()
-                .background(Color(.gray).opacity(0.2))
+                .background(appSettings.modoEscuroAtivo ? Color.gray.opacity(0.2) : Color(.gray).opacity(0.2))
                 .cornerRadius(8)
                 .padding(.horizontal)
             
             TextField("Sobrenome", text: $sobrenome)
                 .padding()
-                .background(Color(.gray).opacity(0.2))
+                .background(appSettings.modoEscuroAtivo ? Color.gray.opacity(0.2) : Color(.gray).opacity(0.2))
                 .cornerRadius(8)
                 .padding(.horizontal)
             
@@ -53,27 +53,27 @@ struct PerfilView: View {
             HStack {
                 Text("Modo Escuro")
                     .font(.headline)
-                    .foregroundColor(modoEscuroAtivo ? .white : .primary)
+                    .foregroundColor(appSettings.modoEscuroAtivo ? .white : .primary)
                 
                 Spacer()
                 
                 ZStack {
                     Capsule()
                         .frame(width: 60, height: 30)
-                        .foregroundColor(modoEscuroAtivo ? .green : .gray)
+                        .foregroundColor(appSettings.modoEscuroAtivo ? .green : .gray)
                     
                     Circle()
                         .frame(width: 26, height: 26)
                         .foregroundColor(.white)
-                        .offset(x: modoEscuroAtivo ? 15 : -15)
-                        .animation(.easeInOut(duration: 0.2), value: modoEscuroAtivo)
+                        .offset(x: appSettings.modoEscuroAtivo ? 15 : -15)
+                        .animation(.easeInOut(duration: 0.2), value: appSettings.modoEscuroAtivo)
                 }
                 .onTapGesture {
-                    modoEscuroAtivo.toggle()
+                    appSettings.modoEscuroAtivo.toggle()
                 }
             }
             .padding()
-            .background(Color(.gray).opacity(0.2))
+            .background(appSettings.modoEscuroAtivo ? Color.gray.opacity(0.2) : Color(.gray).opacity(0.2))
             .cornerRadius(8)
             .padding(.horizontal)
             
@@ -100,9 +100,8 @@ struct PerfilView: View {
             }
         }
         .padding()
-        .background(modoEscuroAtivo ? Color.black : Color.white)
+        .background(appSettings.modoEscuroAtivo ? Color.black : Color.white)
         .edgesIgnoringSafeArea(.all)
-        .preferredColorScheme(modoEscuroAtivo ? .dark : .light)
     }
 
     private func salvarAlteracoes() {
@@ -110,6 +109,7 @@ struct PerfilView: View {
         print("Sobrenome: \(sobrenome)")
     }
 }
+
 
 struct PerfilView_Previews: PreviewProvider {
     static var previews: some View {

@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct HomeView: View {
+    @EnvironmentObject var appSettings: AppSettings
     @State private var pesquisaTexto: String = ""
     @State private var plantasNoJardim: [Planta] = carregarPlantasNoJardim()
     @ObservedObject private var viewModel: HomeViewModel = .init()
@@ -22,7 +23,6 @@ struct HomeView: View {
     @State private var manutencaoSelecionada: String? = nil
     @State private var invasividadeSelecionada: String? = nil
     @State private var ervaDaninhaSelecionada: String? = nil
-    
     
     var plantasFiltradas: [Planta] {
         var plantas = viewModel.plantas
@@ -64,7 +64,7 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color.white
+                Color(appSettings.modoEscuroAtivo ? .black : .white)
                     .edgesIgnoringSafeArea(.all)
                 
                 TabView(selection: $abaSelecionada) {
@@ -77,7 +77,8 @@ struct HomeView: View {
                     
                     VStack(spacing: 20) {
                         ZStack {
-                            Image("MyGreen Logomarca")
+                            // Alterna a imagem da logomarca com base no modo escuro
+                            Image(appSettings.modoEscuroAtivo ? "MyGreen Logomarca Dark" : "MyGreen Logomarca")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 100)
@@ -90,7 +91,7 @@ struct HomeView: View {
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 30, height: 30)
-                                        .foregroundColor(Color("FontGreenDark"))
+                                        .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "32CD32") : Color("FontGreenDark"))
                                 }
                             }
                             .padding(.horizontal)
@@ -103,7 +104,7 @@ struct HomeView: View {
                             TextField("Pesquisar plantas...", text: $pesquisaTexto)
                         }
                         .padding()
-                        .background(Color(hex: "#F5F5DC"))
+                        .background(appSettings.modoEscuroAtivo ? Color.gray.opacity(0.2) : Color(hex: "#F5F5DC"))
                         .cornerRadius(8)
                         .padding(.horizontal)
                         
@@ -114,13 +115,13 @@ struct HomeView: View {
                             }) {
                                 HStack {
                                     Text("Filtros")
-                                        .foregroundColor(Color("FontGreenDark"))
+                                        .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "#32CD32") : Color("FontGreenDark"))
                                         .font(.custom("San Francisco", size: 20))
                                     Image(systemName: "line.horizontal.3.decrease.circle")
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 24)
-                                        .foregroundColor(Color("FontGreenDark"))
+                                        .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "32CD32") : Color("FontGreenDark"))
                                 }
                             }
                         }
@@ -166,6 +167,7 @@ struct HomeView: View {
                     invasividadeSelecionada: $invasividadeSelecionada,
                     ervaDaninhaSelecionada: $ervaDaninhaSelecionada
                 )
+                .environmentObject(appSettings)
             }
         }
         .onAppear {
@@ -178,11 +180,13 @@ struct HomeView: View {
         .onChange(of: plantasNoJardim) { valorAntigo, novoValor in
             salvarPlantasNoJardim(novoValor)
         }
+        .preferredColorScheme(appSettings.modoEscuroAtivo ? .dark : .light)
     }
 }
 
 struct ConteudoView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+            .environmentObject(AppSettings())
     }
 }

@@ -7,11 +7,19 @@
 
 import SwiftUI
 
+import SwiftUI
+
 @main
 struct MyGreen_App: App {
+    @StateObject private var appSettings = AppSettings()
+
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            NavigationView {
+                HomeView()
+            }
+            .environmentObject(appSettings) // Injeta AppSettings
+            .preferredColorScheme(appSettings.modoEscuroAtivo ? .dark : .light) // Aplica o modo escuro
         }
     }
 }

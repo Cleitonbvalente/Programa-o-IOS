@@ -8,7 +8,10 @@
 import SwiftUI
 
 
+import SwiftUI
+
 struct DetalhesPlantaView: View {
+    @EnvironmentObject var appSettings: AppSettings
     let planta: Planta
     @Binding var plantasNoJardim: [Planta]
     
@@ -42,11 +45,11 @@ struct DetalhesPlantaView: View {
                         Text("Sobre")
                             .font(.title2)
                             .bold()
-                            .foregroundColor(Color("FontGreenDark"))
+                            .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "32CD32"): Color("FontGreenDark"))
                         
                         Text(planta.descricao)
                             .font(.body)
-                            .foregroundColor(.black)
+                            .foregroundColor(appSettings.modoEscuroAtivo ? .white : .black)
                     }
                     .padding(.horizontal)
                     
@@ -54,7 +57,7 @@ struct DetalhesPlantaView: View {
                         Text("Detalhes")
                             .font(.title2)
                             .bold()
-                            .foregroundColor(Color("FontGreenDark"))
+                            .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "32CD32") : Color("FontGreenDark"))
                         
                         let detalhes: [(titulo: String, valor: String)] = [
                             ("Toxidade", planta.toxidade),
@@ -66,8 +69,14 @@ struct DetalhesPlantaView: View {
                         ]
                         
                         ForEach(detalhes.indices, id: \.self) { index in
-                            let corFundo = index.isMultiple(of: 2) ? Color.gray.opacity(0.1) : Color.white
-                            LinhaDeInfo(titulo: detalhes[index].titulo, valor: detalhes[index].valor, corFundo: corFundo)
+                            // Ajuste dinâmico das cores de fundo e texto
+                            let corFundo = index.isMultiple(of: 2) ?
+                                (appSettings.modoEscuroAtivo ? Color.gray.opacity(0.1) : Color.gray.opacity(0.1)) :
+                                (appSettings.modoEscuroAtivo ? Color.black.opacity(0.05) : Color.white)
+                            
+                            let corTexto = appSettings.modoEscuroAtivo ? Color.white : Color.black
+                            
+                            LinhaDeInfo(titulo: detalhes[index].titulo, valor: detalhes[index].valor, corFundo: corFundo, corTexto: corTexto)
                         }
                     }
                     .padding(.horizontal)
@@ -76,7 +85,7 @@ struct DetalhesPlantaView: View {
                         Text("Classificação Científica")
                             .font(.title2)
                             .bold()
-                            .foregroundColor(Color("FontGreenDark"))
+                            .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "32CD32") : Color("FontGreenDark"))
                         
                         let classificacaoCientifica: [(titulo: String, valor: String)] = [
                             ("Gênero", planta.genero),
@@ -87,8 +96,14 @@ struct DetalhesPlantaView: View {
                         ]
                         
                         ForEach(classificacaoCientifica.indices, id: \.self) { index in
-                            let corFundo = index.isMultiple(of: 2) ? Color.gray.opacity(0.1) : Color.white
-                            LinhaDeInfo(titulo: classificacaoCientifica[index].titulo, valor: classificacaoCientifica[index].valor, corFundo: corFundo)
+                            // Ajuste dinâmico das cores de fundo e texto
+                            let corFundo = index.isMultiple(of: 2) ?
+                                (appSettings.modoEscuroAtivo ? Color.gray.opacity(0.1) : Color.gray.opacity(0.1)) :
+                                (appSettings.modoEscuroAtivo ? Color.black.opacity(0.05) : Color.white)
+                            
+                            let corTexto = appSettings.modoEscuroAtivo ? Color.white : Color.black
+                            
+                            LinhaDeInfo(titulo: classificacaoCientifica[index].titulo, valor: classificacaoCientifica[index].valor, corFundo: corFundo, corTexto: corTexto)
                         }
                     }
                     .padding(.horizontal)
@@ -97,7 +112,7 @@ struct DetalhesPlantaView: View {
                         Text("Dificuldade")
                             .font(.title2)
                             .bold()
-                            .foregroundColor(Color("FontGreenDark"))
+                            .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "32CD32") : Color("FontGreenDark"))
                         
                         DificuldadeIcone(nivel: calcularNivelDificuldade(resistencia: planta.resistencia, manutencao: planta.manutencao))
                             .padding(.vertical, 8)
@@ -106,23 +121,23 @@ struct DetalhesPlantaView: View {
                             VStack(alignment: .center, spacing: 4) {
                                 Text("Resistência")
                                     .font(.headline)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(appSettings.modoEscuroAtivo ? .white : .black)
                                 Text(planta.resistencia)
                                     .font(.body)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(appSettings.modoEscuroAtivo ? .white : .black)
                             }
                             
                             Text("|")
                                 .font(.headline)
-                                .foregroundColor(Color.black)
+                                .foregroundColor(appSettings.modoEscuroAtivo ? .white : .black)
                             
                             VStack(alignment: .center, spacing: 4) {
                                 Text("Manutenção")
                                     .font(.headline)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(appSettings.modoEscuroAtivo ? .white : .black)
                                 Text(planta.manutencao)
                                     .font(.body)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(appSettings.modoEscuroAtivo ? .white : .black)
                             }
                         }
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -150,16 +165,17 @@ struct DetalhesPlantaView: View {
                     .padding()
             }
             .padding(.horizontal)
-            .background(Color("CorDeFundo"))
+            .background(appSettings.modoEscuroAtivo ? Color.black : Color("CorDeFundo"))
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Text(planta.nome)
                     .font(.title3)
                     .bold()
-                    .foregroundColor(Color("FontGreenDark"))
+                    .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "32CD32"): Color("FontGreenDark"))
             }
         }
+        .preferredColorScheme(appSettings.modoEscuroAtivo ? .dark : .light)
     }
 }
 
@@ -182,16 +198,17 @@ struct LinhaDeInfo: View {
     var titulo: String
     var valor: String
     var corFundo: Color
+    var corTexto: Color // Nova propriedade para a cor do texto
     
     var body: some View {
         HStack {
             Text(titulo)
                 .font(.headline)
-                .foregroundColor(.black)
+                .foregroundColor(corTexto) // Usando a cor dinâmica
             Spacer()
             Text(valor)
                 .font(.body)
-                .foregroundColor(.black)
+                .foregroundColor(corTexto) // Usando a cor dinâmica
         }
         .padding(.vertical, 5)
         .background(corFundo)
@@ -262,6 +279,8 @@ struct Planta: Identifiable, Codable, Equatable {
         self.manutencao = manutencao
     }
 }
+
+
 struct DetalhesPlantaView_Previews: PreviewProvider {
     @State static var plantasNoJardim: [Planta] = []
     
@@ -288,5 +307,6 @@ struct DetalhesPlantaView_Previews: PreviewProvider {
             ),
             plantasNoJardim: .constant([])
         )
+        .environmentObject(AppSettings()) // Adicionado EnvironmentObject para o preview
     }
 }

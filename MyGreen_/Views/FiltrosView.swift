@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct FiltrosView: View {
+    @EnvironmentObject var appSettings: AppSettings // Adicionado EnvironmentObject
     @Binding var mostrarFiltros: Bool
     @Binding var tipoSelecionado: String?
     @Binding var toxidadeSelecionada: String?
@@ -41,6 +42,7 @@ struct FiltrosView: View {
                 }
             }
         }
+        .preferredColorScheme(appSettings.modoEscuroAtivo ? .dark : .light) // Aplica o modo escuro
     }
     
     private func FiltroPicker(titulo: String, opcoes: [String], selecao: Binding<String?>) -> some View {
