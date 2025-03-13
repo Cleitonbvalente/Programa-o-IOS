@@ -71,7 +71,7 @@ struct HomeView: View {
                     MeuJardimView(plantasNoJardim: $plantasNoJardim, plantasDisponiveis: viewModel.plantas)
                         .tabItem {
                             Image(systemName: "leaf")
-                            Text("Meu Jardim")
+                            Text("my.garden")
                         }
                         .tag(0)
                     
@@ -101,7 +101,7 @@ struct HomeView: View {
                         HStack {
                             Image(systemName: "magnifyingglass")
                                 .foregroundColor(.gray)
-                            TextField("Pesquisar plantas...", text: $pesquisaTexto)
+                            TextField("homeview.searchPlant", text: $pesquisaTexto)
                         }
                         .padding()
                         .background(appSettings.modoEscuroAtivo ? Color.gray.opacity(0.2) : Color(hex: "#F5F5DC"))
@@ -114,7 +114,7 @@ struct HomeView: View {
                                 mostrarFiltros.toggle()
                             }) {
                                 HStack {
-                                    Text("Filtros")
+                                    Text("homeview.Filter")
                                         .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "#32CD32") : Color("FontGreenDark"))
                                         .font(.custom("San Francisco", size: 20))
                                     Image(systemName: "line.horizontal.3.decrease.circle")

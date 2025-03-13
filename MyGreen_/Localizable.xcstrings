@@ -1,0 +1,187 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "(%@)" : {
+
+    },
+    "%lld horas" : {
+
+    },
+    "|" : {
+
+    },
+    "Adicionar" : {
+
+    },
+    "Adicionar ao Meu Jardim" : {
+
+    },
+    "Adicionar Plantas" : {
+
+    },
+    "Alterações realizadas com sucesso." : {
+
+    },
+    "Aplicar" : {
+
+    },
+    "Atrasada" : {
+
+    },
+    "Classificação Científica" : {
+
+    },
+    "Detalhes" : {
+
+    },
+    "Dificuldade" : {
+
+    },
+    "Favoritos" : {
+
+    },
+    "Filtros" : {
+
+    },
+    "homeview.Filter" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filters"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtros"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtros"
+          }
+        }
+      }
+    },
+    "homeview.searchPlant" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search plants..."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pesquisar plantas..."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pesquisar plantas..."
+          }
+        }
+      }
+    },
+    "Início" : {
+
+    },
+    "Manutenção" : {
+
+    },
+    "Meu Jardim" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My Garden"
+          }
+        }
+      }
+    },
+    "Modo Escuro" : {
+
+    },
+    "my.garden" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My Garden"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mi Jardin"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meu Jardim"
+          }
+        }
+      }
+    },
+    "Nenhuma planta no jardim." : {
+
+    },
+    "Nome" : {
+
+    },
+    "OK" : {
+
+    },
+    "Perfil" : {
+
+    },
+    "Pesquisar minhas plantas..." : {
+
+    },
+    "Planta regada" : {
+
+    },
+    "Plantas Favoritas" : {
+
+    },
+    "Regar planta" : {
+
+    },
+    "Remover do Meu Jardim" : {
+
+    },
+    "Resistência" : {
+
+    },
+    "Ruim" : {
+
+    },
+    "Salvar as alterações" : {
+
+    },
+    "Sobre" : {
+
+    },
+    "Sobrenome" : {
+
+    },
+    "Sucesso" : {
+
+    },
+    "Todas" : {
+
+    },
+    "Você ainda não tem plantas favoritas." : {
+
+    }
+  },
+  "version" : "1.0"
+}
