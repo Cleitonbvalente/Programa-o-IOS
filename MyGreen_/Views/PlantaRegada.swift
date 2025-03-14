@@ -84,7 +84,7 @@ struct PlantaRegadaView: View {
                             .scaledToFit()
                             .frame(width: 30, height: 30)
                             .foregroundColor(.white)
-                        Text(plantaRegada ? "OK" : "Ruim")
+                        Text(plantaRegada ? "Plantaregada.OKAY" : "plantaregada.BAD")
                             .font(.title)
                             .fontWeight(.bold)
                             .foregroundColor(.white)
@@ -105,7 +105,7 @@ struct PlantaRegadaView: View {
                                 .scaledToFit()
                                 .frame(width: 24, height: 24)
                                 .foregroundColor(.white)
-                            Text("\(horasNecessarias) horas")
+                            Text("\(horasNecessarias) plantaregada.hours")
                                 .font(.headline)
                                 .foregroundColor(.white)
                         } else {
@@ -115,7 +115,7 @@ struct PlantaRegadaView: View {
                                 .frame(width: 24, height: 24)
                                 .foregroundColor(.white)
                             
-                            Text("Atrasada")
+                            Text("plantaregada.late")
                                 .font(.headline)
                                 .foregroundColor(.white)
                         }
@@ -133,7 +133,7 @@ struct PlantaRegadaView: View {
                 Button(action: {
                     atualizarUltimaRega()
                 }) {
-                    Text(plantaRegada ? "Planta regada" : "Regar planta")
+                    Text(plantaRegada ? "plantaregada.wateredPlant" : "plantaregada.wateringPlant")
                         .font(.headline)
                         .foregroundColor(plantaRegada ? .white : Color("FontGreenDark"))
                         .frame(width: 200, height: 50)

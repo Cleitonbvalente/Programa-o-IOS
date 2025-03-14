@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-import SwiftUI
 
 struct FavoritosView: View {
     @Binding var plantasFavoritas: [Planta]
@@ -15,13 +14,13 @@ struct FavoritosView: View {
 
     var body: some View {
         VStack {
-            Text("Plantas Favoritas")
+            Text("favoritos.favoritePlants")
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .padding()
             
             if plantasFavoritas.isEmpty {
-                Text("Você ainda não tem plantas favoritas.")
+                Text("favoritos.youDon'tHaveAnyFavoritePlantsYet")
                     .foregroundColor(.gray)
                     .italic()
             } else {
@@ -44,7 +43,7 @@ struct FavoritosView: View {
                 }
             }
         }
-        .navigationTitle("Favoritos")
+        .navigationTitle("favoritos.favorites")
         .foregroundColor(Color("FontGreenDark"))
         .onAppear {
             plantasFavoritas = carregarPlantasFavoritas()
@@ -62,6 +61,7 @@ struct FavoritosView: View {
         return nil
     }
 }
+
 
 struct FavoritosView_Previews: PreviewProvider {
     @State static var plantasFavoritas: [Planta] = []

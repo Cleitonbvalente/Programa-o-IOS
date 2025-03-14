@@ -18,8 +18,8 @@ struct MyGreen_App: App {
             NavigationView {
                 HomeView()
             }
-            .environmentObject(appSettings) // Injeta AppSettings
-            .preferredColorScheme(appSettings.modoEscuroAtivo ? .dark : .light) // Aplica o modo escuro
+            .environmentObject(appSettings)
+            .preferredColorScheme(appSettings.modoEscuroAtivo ? .dark : .light)
         }
     }
 }

@@ -7,8 +7,9 @@
 
 import SwiftUI
 
+
 struct MeuJardimView: View {
-    @EnvironmentObject var appSettings: AppSettings // Adicionado EnvironmentObject
+    @EnvironmentObject var appSettings: AppSettings
     @Binding var plantasNoJardim: [Planta]
     @State private var pesquisaTexto: String = ""
     @State private var mostrarAdicionarPlantas = false
@@ -18,11 +19,11 @@ struct MeuJardimView: View {
     var body: some View {
         VStack(spacing: 16) {
             HStack {
-                Text("Meu Jardim")
+                Text("Meujardim.Mygarden")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .padding(.top)
-                    .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "32CD32") : Color("FontGreenDark")) // Ajuste de cor
+                    .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "32CD32") : Color("FontGreenDark"))
                 
                 Spacer()
                 
@@ -33,9 +34,9 @@ struct MeuJardimView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 24, height: 24)
-                        .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "32CD32") : Color("FontGreenDark")) // Ajuste de cor
+                        .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "32CD32") : Color("FontGreenDark"))
                         .padding(8)
-                        .background(appSettings.modoEscuroAtivo ? Color.gray.opacity(0.2) : Color.white) // Ajuste de cor
+                        .background(appSettings.modoEscuroAtivo ? Color.gray.opacity(0.2) : Color.white)
                         .cornerRadius(8)
                         .shadow(radius: 2)
                 }
@@ -45,17 +46,17 @@ struct MeuJardimView: View {
             HStack {
                 Image(systemName: "magnifyingglass")
                     .foregroundColor(.gray)
-                TextField("Pesquisar minhas plantas...", text: $pesquisaTexto)
+                TextField("Meujardim.searchMyPlants...", text: $pesquisaTexto)
             }
             .padding()
-            .background(appSettings.modoEscuroAtivo ? Color.gray.opacity(0.2) : Color(hex: "#F5F5DC")) // Ajuste de cor
+            .background(appSettings.modoEscuroAtivo ? Color.gray.opacity(0.2) : Color(hex: "#F5F5DC"))
             .cornerRadius(8)
             .padding(.horizontal)
 
             if plantasNoJardim.isEmpty {
                 Spacer()
-                Text("Nenhuma planta no jardim.")
-                    .foregroundColor(appSettings.modoEscuroAtivo ? .white : .black) // Ajuste de cor
+                Text("Meujardim.noPlantsInTheGarden.")
+                    .foregroundColor(appSettings.modoEscuroAtivo ? .white : .black)
                     .italic()
                 Spacer()
             } else {
@@ -78,11 +79,11 @@ struct MeuJardimView: View {
                 }
             }
         }
-        .navigationTitle("Meu Jardim")
-        .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "32CD32") : Color("FontGreenDark")) // Ajuste de cor
+        .navigationTitle("Meujardim.myGarden")
+        .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "32CD32") : Color("FontGreenDark"))
         .sheet(isPresented: $mostrarAdicionarPlantas) {
             AdicionarPlantasView(plantasNoJardim: $plantasNoJardim, plantasDisponiveis: plantasDisponiveis)
-                .environmentObject(appSettings) // Injeta AppSettings
+                .environmentObject(appSettings)
         }
         .onAppear {
             plantasNoJardim = carregarPlantasNoJardim()
@@ -90,6 +91,6 @@ struct MeuJardimView: View {
         .onChange(of: plantasNoJardim) { valorAntigo, novoValor in
             salvarPlantasNoJardim(novoValor)
         }
-        .preferredColorScheme(appSettings.modoEscuroAtivo ? .dark : .light) // Aplica o modo escuro
+        .preferredColorScheme(appSettings.modoEscuroAtivo ? .dark : .light)
     }
 }

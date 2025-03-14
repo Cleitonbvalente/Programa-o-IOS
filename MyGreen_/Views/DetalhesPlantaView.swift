@@ -8,8 +8,6 @@
 import SwiftUI
 
 
-import SwiftUI
-
 struct DetalhesPlantaView: View {
     @EnvironmentObject var appSettings: AppSettings
     let planta: Planta
@@ -42,7 +40,7 @@ struct DetalhesPlantaView: View {
                         .padding(.horizontal, 0)
                     
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("Sobre")
+                        Text("Detalhesplanta.about")
                             .font(.title2)
                             .bold()
                             .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "32CD32"): Color("FontGreenDark"))
@@ -54,7 +52,7 @@ struct DetalhesPlantaView: View {
                     .padding(.horizontal)
                     
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("Detalhes")
+                        Text("Detalhesplanta.details")
                             .font(.title2)
                             .bold()
                             .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "32CD32") : Color("FontGreenDark"))
@@ -82,7 +80,7 @@ struct DetalhesPlantaView: View {
                     .padding(.horizontal)
                     
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("Classificação Científica")
+                        Text("Detalhesplanta.scientificClassification")
                             .font(.title2)
                             .bold()
                             .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "32CD32") : Color("FontGreenDark"))
@@ -96,7 +94,6 @@ struct DetalhesPlantaView: View {
                         ]
                         
                         ForEach(classificacaoCientifica.indices, id: \.self) { index in
-                            // Ajuste dinâmico das cores de fundo e texto
                             let corFundo = index.isMultiple(of: 2) ?
                                 (appSettings.modoEscuroAtivo ? Color.gray.opacity(0.1) : Color.gray.opacity(0.1)) :
                                 (appSettings.modoEscuroAtivo ? Color.black.opacity(0.05) : Color.white)
@@ -109,7 +106,7 @@ struct DetalhesPlantaView: View {
                     .padding(.horizontal)
                     
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("Dificuldade")
+                        Text("detalhesplanta.difficulty")
                             .font(.title2)
                             .bold()
                             .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "32CD32") : Color("FontGreenDark"))
@@ -119,7 +116,7 @@ struct DetalhesPlantaView: View {
                         
                         HStack(spacing: 40) {
                             VStack(alignment: .center, spacing: 4) {
-                                Text("Resistência")
+                                Text("detalhesplanta.resistance")
                                     .font(.headline)
                                     .foregroundColor(appSettings.modoEscuroAtivo ? .white : .black)
                                 Text(planta.resistencia)
@@ -132,7 +129,7 @@ struct DetalhesPlantaView: View {
                                 .foregroundColor(appSettings.modoEscuroAtivo ? .white : .black)
                             
                             VStack(alignment: .center, spacing: 4) {
-                                Text("Manutenção")
+                                Text("detalhesplanta.maintenance")
                                     .font(.headline)
                                     .foregroundColor(appSettings.modoEscuroAtivo ? .white : .black)
                                 Text(planta.manutencao)
@@ -156,7 +153,7 @@ struct DetalhesPlantaView: View {
                 }
                 salvarPlantasNoJardim(plantasNoJardim)
             }) {
-                Text(plantaEstaNoJardim ? "Remover do Meu Jardim" : "Adicionar ao Meu Jardim")
+                Text(plantaEstaNoJardim ? "detalhesplanta.removeFromMyGarden" : "detalhesplanta.addToMyGarden")
                     .font(.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, minHeight: 50)
@@ -198,17 +195,17 @@ struct LinhaDeInfo: View {
     var titulo: String
     var valor: String
     var corFundo: Color
-    var corTexto: Color // Nova propriedade para a cor do texto
+    var corTexto: Color
     
     var body: some View {
         HStack {
             Text(titulo)
                 .font(.headline)
-                .foregroundColor(corTexto) // Usando a cor dinâmica
+                .foregroundColor(corTexto)
             Spacer()
             Text(valor)
                 .font(.body)
-                .foregroundColor(corTexto) // Usando a cor dinâmica
+                .foregroundColor(corTexto)
         }
         .padding(.vertical, 5)
         .background(corFundo)
@@ -307,6 +304,6 @@ struct DetalhesPlantaView_Previews: PreviewProvider {
             ),
             plantasNoJardim: .constant([])
         )
-        .environmentObject(AppSettings()) // Adicionado EnvironmentObject para o preview
+        .environmentObject(AppSettings())
     }
 }

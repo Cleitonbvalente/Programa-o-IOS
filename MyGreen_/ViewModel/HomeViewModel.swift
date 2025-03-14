@@ -9,18 +9,14 @@ import Foundation
 
 class HomeViewModel: ObservableObject {
     
-    // Lista de plantas disponíveis
     @Published var plantas: [Planta] = []
     
-    // Lista de plantas favoritas
     @Published var plantasFavoritas: [Planta] = []
     
     init() {
-        // Carrega as plantas ao inicializar o ViewModel
         carregarPlantas()
     }
     
-    // Método para carregar as plantas
     private func carregarPlantas() {
         self.plantas = [
             Planta(

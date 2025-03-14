@@ -6,9 +6,8 @@
 //
 
 import SwiftUI
-
-import SwiftUI
 import Combine
+
 
 class AppSettings: ObservableObject {
     @Published var modoEscuroAtivo: Bool = false

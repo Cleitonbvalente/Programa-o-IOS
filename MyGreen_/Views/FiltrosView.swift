@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct FiltrosView: View {
-    @EnvironmentObject var appSettings: AppSettings // Adicionado EnvironmentObject
+    @EnvironmentObject var appSettings: AppSettings
     @Binding var mostrarFiltros: Bool
     @Binding var tipoSelecionado: String?
     @Binding var toxidadeSelecionada: String?
@@ -33,22 +33,22 @@ struct FiltrosView: View {
                 
                 FiltroPicker(titulo: "Erva Daninha", opcoes: ["Sim", "Não"], selecao: $ervaDaninhaSelecionada)
             }
-            .navigationTitle("Filtros")
+            .navigationTitle("filtros.filters")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
-                    Button("Aplicar") {
+                    Button("filtros.apply") {
                         mostrarFiltros = false
                     }
                 }
             }
         }
-        .preferredColorScheme(appSettings.modoEscuroAtivo ? .dark : .light) // Aplica o modo escuro
+        .preferredColorScheme(appSettings.modoEscuroAtivo ? .dark : .light)
     }
     
     private func FiltroPicker(titulo: String, opcoes: [String], selecao: Binding<String?>) -> some View {
         Section(header: Text(titulo)) {
             Picker(titulo, selection: selecao) {
-                Text("Todas").tag(nil as String?)
+                Text("filtros.all").tag(nil as String?)
                 ForEach(opcoes, id: \.self) { opcao in
                     Text(opcao).tag(opcao as String?)
                 }

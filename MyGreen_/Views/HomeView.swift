@@ -143,14 +143,14 @@ struct HomeView: View {
                     }
                     .tabItem {
                         Image(systemName: "house")
-                        Text("Início")
+                        Text("homeview.start")
                     }
                     .tag(1)
                     
                     FavoritosView(plantasFavoritas: $viewModel.plantasFavoritas)
                         .tabItem {
                             Image(systemName: "heart")
-                            Text("Favoritos")
+                            Text("homeview.favorites")
                         }
                         .tag(2)
                 }

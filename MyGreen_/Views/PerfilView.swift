@@ -1,3 +1,4 @@
+
 //
 //  PerfilView.swift
 //  MyGreen_
@@ -18,7 +19,7 @@ struct PerfilView: View {
     var body: some View {
         VStack(spacing: 20) {
             HStack {
-                Text("Perfil")
+                Text("perfil.profile")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "32CD32") : Color("FontGreenDark"))
@@ -35,13 +36,13 @@ struct PerfilView: View {
                 .foregroundColor(appSettings.modoEscuroAtivo ? Color(hex: "32CD32") : Color("FontGreenDark"))
                 .padding(.top, 10)
             
-            TextField("Nome", text: $nome)
+            TextField("perfil.name", text: $nome)
                 .padding()
                 .background(appSettings.modoEscuroAtivo ? Color.gray.opacity(0.2) : Color(.gray).opacity(0.2))
                 .cornerRadius(8)
                 .padding(.horizontal)
             
-            TextField("Sobrenome", text: $sobrenome)
+            TextField("perfil.lastName", text: $sobrenome)
                 .padding()
                 .background(appSettings.modoEscuroAtivo ? Color.gray.opacity(0.2) : Color(.gray).opacity(0.2))
                 .cornerRadius(8)
@@ -51,7 +52,7 @@ struct PerfilView: View {
                 .frame(height: 40)
             
             HStack {
-                Text("Modo Escuro")
+                Text("perfil.darkMode")
                     .font(.headline)
                     .foregroundColor(appSettings.modoEscuroAtivo ? .white : .primary)
                 
@@ -83,7 +84,7 @@ struct PerfilView: View {
                 salvarAlteracoes()
                 mostrarAlertaSucesso = true
             }) {
-                Text("Salvar as alterações")
+                Text("perfil.saveChanges")
                     .font(.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, minHeight: 50)
@@ -94,8 +95,8 @@ struct PerfilView: View {
             .padding(.bottom, 20)
             .alert(isPresented: $mostrarAlertaSucesso) {
                 Alert(
-                    title: Text("Sucesso"),
-                    message: Text("Alterações realizadas com sucesso."),
+                    title: Text("perfil.success"),
+                    message: Text("perfil.changesMadeSuccessfully"),
                     dismissButton: .default(Text("OK")))
             }
         }
@@ -110,10 +111,8 @@ struct PerfilView: View {
     }
 }
 
-
 struct PerfilView_Previews: PreviewProvider {
     static var previews: some View {
         PerfilView()
     }
 }
-
